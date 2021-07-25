@@ -1,5 +1,7 @@
+const { urlencoded } = require('express');
 const express = require('express');
 //calling express
+const cookieParser = require('cookie-parser')
 const app = express();
 const port = 8000;
 //while production or launching on server we use port 80 by default
@@ -7,6 +9,12 @@ const port = 8000;
 //including layouts
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
+
+//to convert the data from form into object
+app.use(urlencoded());
+
+//to use cookie parser
+app.use(cookieParser());
 
 //extract style and scripts from subpages into the layout
 app.set('layout extractStyles' , true);

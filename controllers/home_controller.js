@@ -3,6 +3,7 @@ module.exports.home = function home(req , res){
 
    // res.end('<h1>Hey I am in Contoller!!</h1>');
   
+    console.log(req.cookies);
    res.render('home' , {
         'title' : "Social Clone"
    })
