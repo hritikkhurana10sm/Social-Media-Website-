@@ -4,6 +4,10 @@ const app = express();
 const port = 8000;
 //while production or launching on server we use port 80 by default
 
+//including layouts
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
 //setting up the view engine
 app.set('view engine' , 'ejs');
 app.set('views' , './views');
