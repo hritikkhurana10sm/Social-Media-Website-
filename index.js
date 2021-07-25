@@ -15,6 +15,9 @@ app.set('layout extractScripts' , true);
 //including assets files
 app.use(express.static('./assets'));
 
+//requiring mongoose
+const db = require('./config/mongoose');
+
 //setting up the view engine
 app.set('view engine' , 'ejs');
 app.set('views' , './views');
