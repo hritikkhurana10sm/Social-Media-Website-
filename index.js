@@ -11,7 +11,7 @@ const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 
 //to convert the data from form into object
-app.use(urlencoded());
+app.use(express.urlencoded());
 
 //to use cookie parser
 app.use(cookieParser());

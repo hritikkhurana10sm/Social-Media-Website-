@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 
 //mongoose connect to data base : mongobd
-mongoose.connect('mongodb://localhost/contact_list_db');
+mongoose.connect('mongodb://localhost/social_db');
 
 //to check weather connected or not
 const db = mongoose.connection

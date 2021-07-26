@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         required : true,
         unique : true
     },
-    passwords : {
+    password : {
 
         type : String,
         required : true
@@ -27,4 +27,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User' , userSchema);
 
-model.exports = User;
+module.exports = User;
