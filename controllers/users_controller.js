@@ -69,7 +69,7 @@ module.exports.createSession = function(req , res){
              console.log('error in finding user in siging in');
              return;
          }
-  console.log("ehy we are here !!!1");
+  
          //handle user found
 
          if(user){
