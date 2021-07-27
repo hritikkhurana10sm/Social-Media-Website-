@@ -2,10 +2,34 @@ const User = require('../models/user');
 
 module.exports.profile = function profile(req , res){
 
-    return res.render('user_profile' , {
+     //if we dont have cookie in application then we need to go redirect back to sign in page
+ 
+       if(req.cookies.user_id){
+         
+        User.findById(req.cookies.user_id , function(err , user){
 
-        title : "User Profile"
-    });
+            if(err){
+
+                console.log("error in finding user for profie!!");
+                return;
+            }
+                 
+            return res.render('user_profile' , {
+                title : "Profile of User",
+                name : user.name,
+                email : user.email
+            })
+
+        })
+        // return res.render('user_profile' , {
+
+        //     title : "User Profile"
+        // });
+       }else{
+           return res.redirect('/users/signin');
+       }
+    //if we find cookie on application we can visit direclty to sign page , continue....
+   
 }
 
 module.exports.signin = function(req , res){
@@ -27,7 +51,7 @@ module.exports.signup = function(req , res){
 //get the sign up data
 module.exports.create = function(req , res){
 
-    console.log('+++++++++++++++++++++ ' , req.body);
+
     if(req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }   
@@ -87,4 +111,15 @@ module.exports.createSession = function(req , res){
              return res.redirect('back');
          }
    });
+}
+
+
+//sign out controllers
+
+module.exports.signout = function(req , res){
+
+    
+    res.clearCookie("user_id");
+
+   res.redirect('/users/signin');
 }
