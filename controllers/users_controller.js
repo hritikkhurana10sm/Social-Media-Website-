@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 module.exports.profile = function profile(req , res){
 
+   
     return res.render('user_profile' , {
 
         title : "User Profile"
@@ -10,6 +11,12 @@ module.exports.profile = function profile(req , res){
 
 module.exports.signin = function(req , res){
 
+    
+    if(req.isAuthenticated()){
+
+        return res.redirect('/users/profile');
+     }
+
     return res.render('user_sign_in' , {
 
         title : "Sign In"
@@ -17,6 +24,11 @@ module.exports.signin = function(req , res){
 }
 
 module.exports.signup = function(req , res){
+
+    if(req.isAuthenticated()){
+
+        return res.redirect('/users/profile');
+     }
 
     return res.render('user_sign_up' , {
 
@@ -64,4 +76,13 @@ module.exports.create = function(req , res){
 module.exports.createSession = function(req , res){
 
   //todo
+
+  return res.redirect('/users/profile');
 }
+
+
+/*
+Without Mongo Store, this was the problem we faced
+
+- User was logged out after every server load
+*/
