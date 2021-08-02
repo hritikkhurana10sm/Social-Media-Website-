@@ -80,6 +80,12 @@ module.exports.createSession = function(req , res){
   return res.redirect('/users/profile');
 }
 
+module.exports.destroySession= function(req , res){
+
+    req.logout();
+
+    res.redirect('/');
+}
 
 /*
 Without Mongo Store, this was the problem we faced
