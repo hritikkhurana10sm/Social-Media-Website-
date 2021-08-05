@@ -1,15 +1,41 @@
-<header>
-    <h1>this is header</h1>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <ul>
-        <%if(locals.user){%>
-            <li><%= user.name%></li>
-            <li><%= user.email%></li>
-            <li><a href="/users/signout">Sign Out</a></li>
-        <%}else{%>
-            
-            <li><a href="/users/signin">Sign In</a></li>
-            <li><a href="/users/signup">Sign Up</a></li>
-        <%}%>  
-    </ul>
-</header>
+<header>
+    <!-- <h1>this is header</h1> -->
+
+
+    <%if(locals.user){%>
+
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #131921;">
+           
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="/images/logo1.PNG" alt="" width="110" height="34" class="d-inline-block align-text-top"></a>
+                <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon bg-white"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <!-- <a class="navbar-brand" href="#"><img src="/images/logo1.PNG" alt="" width="110" height="34" class="d-inline-block align-text-top"></a> -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="#"><%= user.name%></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="#"><%= user.email%></a>
+                  </li>
+                  <li class="nav-item d-flex  mx-3">
+                    <input type="text"  class="form-control" placeholder="Search a Product" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary text-white" type="button" id="button-addon2">Search</button>
+                  </li>
+                </ul>
+                <div class="d-flex">
+                    <a class = "text-white text-decoration-none text-white"href="/users/signout">Sign Out</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        <%}%> 
+    </header>
+
+      <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

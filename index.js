@@ -89,6 +89,22 @@ app.use(passport.session());
 //info to the views
 app.use(passport.setAuthenticatedUser);
 
+
+//node sass middle ware
+//sass is a file used to write css with ease
+
+const sassMiddleware = require('node-sass-middleware');
+
+app.use(sassMiddleware({
+
+    src: './assets/scss',
+    dest:'./assets/css',
+    debug : true,
+    outputStyle : 'extended',
+    prefix:'/css'
+}));
+
+
 //adding middleware
 //before starting the server it woulg go in router
 app.use('/' , require('./routes/index'));
