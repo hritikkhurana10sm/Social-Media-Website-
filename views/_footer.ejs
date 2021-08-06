@@ -1,3 +1,57 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <footer>
-    <!-- <h1>this is footer</h1> -->
+     <%if(locals.user){%>  
+    <div>
+        
+        <div class = "container-fluid text-white p-1" style="background-color: #232F3E;">
+            
+            <a href = "#"><button type = "button" class = "btn btn-primary btn-lg btn-bloc" style="margin : 0;border: none;background-color: #37475a; width: 100%;">Back to top</button></a>
+            <hr>
+            <ul style="display: flex; flex-wrap : wrap;text-decoration: none;list-style: none; justify-content: space-around;" class="text-start my-5">
+                 
+                 <li>
+                     <ul style="display: inline-block;text-decoration: none;list-style: none;width:200px;margin-top: 2rem;">
+                         <li><b class="text-white">Get to Know Us</b></li>
+                         <li>About Us</li>
+                         <li>Careers</li>
+                         <li>Press Releases</li>
+                         <li>Amazon Cares</li>
+                         <li>Gift a smile</li>
+                     </ul>
+                 </li>
+                  
+                 <li>
+                    <ul style="display: inline-block;text-decoration: none;list-style: none;width:200px;margin-top: 2rem;">
+                        <li><b class="text-white">Connect with Us</b></li>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <ul style="display: inline-block;text-decoration: none;list-style: none;width:200px;margin-top: 2rem;">
+                        <li><b class="text-white">Connect with Us</b></li>
+                        <li>Your Account</li>
+                        <li>Returns</li>
+                        <li>100% Purchase Protection</li>
+                        <li>Amazon App Download</li>
+                        <li>Amazon Assitant Download</li>
+                        <li>Help</li>
+                    </ul>
+                </li>
+
+             </ul>
+             <hr>
+             <img src="/images/logo3.PNG" alt="" class="text-center" width="120px" >
+             <hr>
+        </div>
+    </div>
+
+    <%}%>
 </footer>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
