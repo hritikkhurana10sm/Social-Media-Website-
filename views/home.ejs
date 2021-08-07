@@ -3,7 +3,7 @@
 <ul class = "fw-5 text-start list-style-none">
     <li>This site <b>(AMAZON CLONE)</b> still under contruction</li>
     <li>If u have account , you can go to sign in page direclty following the link 
-        <a href="http://localhost:8000/users/sigin">Sign In</a>
+        <a href="http://localhost:8000/users/signin">Sign In</a>
     </li>
     <li>If u dont have account , you can go to signup page following this link
         <a href="http://localhost:8000/users/signup">Sign Up</a>
@@ -14,3 +14,16 @@
         <a href="http://localhost:8000/users/profile">User Profile</a>
     </li>
 </ul>
+
+<br>
+<br>
+
+<section id="feed-posts">
+
+    <h2>FEED POSTS</h2>
+<form action="/posts/new"  method = "POST" style="text-align: start;margin-left: 3rem;">
+
+    <textarea name="content" cols="30" rows="3" placeholder="post-details"></textarea>
+    <input type="submit" placeholder="Post it!" value="Post">
+</form>
+</section>

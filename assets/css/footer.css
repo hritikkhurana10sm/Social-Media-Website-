@@ -1,0 +1,22 @@
+footer div div a button {
+  margin: 0;
+  border: none!important;
+  background-color: #37475a!important;
+  width: 100%; 
+}
+
+footer div div ul {
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  list-style: none;
+  justify-content: space-around; }
+
+footer div div li ul {
+  display: inline-block;
+  text-decoration: none;
+  list-style: none;
+  width: 200px;
+  margin-top: 2rem; }
+
+ 

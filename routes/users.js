@@ -14,6 +14,8 @@ router.get('/signup' , user_controller.signup );
 
 router.post('/create' ,  user_controller.create);
 
+
+
 router.post('/create-session' , passport.authenticate(
     'local' , //type of stratergy
     {failureRedirect : '/users/signin'}

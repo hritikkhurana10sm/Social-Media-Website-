@@ -1,0 +1,40 @@
+footer{
+  div{
+    div{
+
+        a{
+            button{
+            margin : 0;
+            border: none;
+            background-color: #37475a; 
+            width: 100%;
+            }
+
+            button:hover{
+                background-color: #4b5055;
+            }
+        }
+
+        ul{
+
+            display: flex; 
+            flex-wrap : wrap;
+            text-decoration: none;
+            list-style: none; 
+            justify-content: space-around;   
+        }
+
+        li{
+
+            ul{
+                display: inline-block;
+                text-decoration: none;
+                list-style: none;
+                width:200px;
+                margin-top: 2rem;  
+            }
+        }
+    }
+
+}
+}

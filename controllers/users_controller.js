@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/posts');
 
 module.exports.profile = function profile(req , res){
 
@@ -81,7 +82,7 @@ module.exports.createSession = function(req , res){
 }
 
 module.exports.destroySession= function(req , res){
-
+    //res.clearCookie('Social');
     req.logout();
 
     res.redirect('/');
