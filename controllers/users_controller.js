@@ -22,6 +22,8 @@ module.exports.signin = function(req , res){
 
         title : "Sign In"
     });
+
+    
 }
 
 module.exports.signup = function(req , res){

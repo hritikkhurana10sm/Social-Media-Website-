@@ -26,4 +26,15 @@
     <textarea name="content" cols="30" rows="3" placeholder="post-details"></textarea>
     <input type="submit" placeholder="Post it!" value="Post">
 </form>
+
+<div>
+      <ul style="list-style: none; text-align: left;">
+       <%for(p of post){%>
+            
+            <li><%= p.content%>
+              <small style="background-color: brown;color: wheat;"><%=p.user.name%></small>
+            </li>
+        <%}%>
+    </ul>
+</div>
 </section>

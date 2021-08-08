@@ -85,6 +85,8 @@ passport.setAuthenticatedUser = function(req , res , next){
         //and we are just sending this to the  locals from the views
 
        res.locals.user = req.user; 
+
+       console.log('rq.user  ' , req.user);
     }
 
     return next();
