@@ -8,7 +8,11 @@ module.exports.home = function home(req , res){
     console.log(req.cookies);
   
        //populatig the user
-       Post.find({}).populate('user').exec(function(err , post){
+       Post.find({}).populate('user').populate({path:'comments', populate : {
+                 path:'user'
+          }
+       })
+       .exec(function(err , post){
 
             if(err){
                console.log("error is finding the user");

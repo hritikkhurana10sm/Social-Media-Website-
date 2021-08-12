@@ -14,6 +14,8 @@ router.use('/users' , require('./users'));
 
 router.use('/posts' , require('./posts'));
 
+
+router.use('/comments' , require('./comments'));
 //just confirmation statement
 console.log("Hey I am in router!!");
 
