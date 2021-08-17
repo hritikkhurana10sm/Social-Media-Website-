@@ -1,0 +1,41 @@
+#box{
+    display: flex;
+    background-color: black;
+
+    #user-section{
+
+        width: 25%;
+        padding : 10px;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        ul{
+            padding: 3px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            
+            li{
+                border-radius: 25px;    
+                i{
+                    color : grey;
+                }
+
+                color : white;
+            }
+        }
+
+        
+    } 
+    #feed-posts{
+
+        width: 50%;
+        padding : 10px;
+    }
+
+    #friends-list{
+
+        width : 25%;
+        padding : 10px;
+    }
+}

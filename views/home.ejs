@@ -1,107 +1,118 @@
-<h1>Social Media Clone / <%= title %>
-</h1>
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<div id="box">
 
-<ul class="fw-5 text-start list-style-none">
-    <li>This site <b>(AMAZON CLONE)</b> still under contruction</li>
-    <li>If u have account , you can go to sign in page direclty following the link
-        <a href="http://localhost:8000/users/signin">Sign In</a>
-    </li>
-    <li>If u dont have account , you can go to signup page following this link
-        <a href="http://localhost:8000/users/signup">Sign Up</a>
-    </li>
 
-    <li>
-        If You have signin in then you can go to profile page following this link
-        <a href="http://localhost:8000/users/profile">User Profile</a>
-    </li>
-</ul>
+    <section id="user-section" style="position: fixed;" >
 
-<br>
-<br>
+         <ul>
+           
+             <li>
+                <i class="fas fa-home"></i>
+                <b><a href="#" style="text-decoration: none;color:white">Home</a></b>
+             </li>
+             
+             <li>
+                <i class="far fa-address-card"></i>
+               <span>Profile</span> 
+            </li>
 
-<section id="feed-posts">
+             <li>
+                <i class="fas fa-mail-bulk"></i>
+                 <span>Posts</span>
+             </li>
 
-    <h2>FEED POSTS</h2>
+             <li>
+                <i class="fas fa-users"></i>
+                 <span>Friends</span>
+             </li>
 
+             <li>
+                 <div id="tweet" class="bg-primary">
+                     <b>Tweet</b>
+                 </div>
+             </li>
+         </ul>
+
+         <ul style="margin-top: 6rem;">
+             <%if(locals.user){%>
+             <li>
+                <i class="far fa-user" style="margin-left: -35px;"></i>
+                 <span style="color: white;"><%= user.name%></span><br>
+                 <span style="color: gray;"><%= user.email%></span>
+            </li>
+
+            <li>
+                <div id="tweet"  style = "width: 130px; margin : auto" class="bg-primary">
+                    <b><a href="/users/signout" style="text-decoration: none;color:white">Sign Out</a></b>
+                </div>
+             </li>
+
+             
+            
+             <%}else{%>
+           
+             <li>
+                <div id="tweet" style = "width: 130px;margin : auto" class="bg-primary">
+                    <b><a href="/users/signin" style="text-decoration: none;color:white">Sign In</a></b>
+                </div>
+             </li>
+             
+             <li>
+                <div id="tweet"  style = "width: 130px; margin : auto" class="bg-primary">
+                    <b><a href="/users/signup" style="text-decoration: none;color:white">Sign Up</a></b>
+                </div>
+             </li>
+            <%}%>
+
+         </ul>
+    </section>
+<section id="feed-posts" style="margin-left: 250px;min-width: 600px;">
+
+    <h4 style="color: white; margin-top: 20px;">Home</h4>
+     <hr style="color: white; height: 1px;">
     <%if(locals.user){%>
-        <form action="/posts/new" method="POST" style="text-align: start;margin-left: 3rem;">
+        <!-- Input the post form -->
+        <form action="/posts/new" method="POST" style="text-align: start;margin-left: 3rem;display: flex;justify-content: space-around;">
+            
+            <input placeholder="🤔 What's happening" name="content" style="justify-self : start;flex-grow : 1;background-color: black;color: grey;line-height: 2;font-size: 24px;border: none;outline: none;">
+            <input type="submit"  value="Tweet" class="bg-primary" style="margin-right : 5rem;margin-left : 1.5rem;font-size : 16px;color:white;font-weight : bolder;width: 90px;padding: 0.5rem;border-radius: 25px;border: none;outline: none;">
 
-            <textarea name="textarea" rows="3" cols="30" placeholder="Write Something here....."
-                name="content"></textarea>
-            <input type="submit" placeholder="Post it!" value="Post">
         </form>
-
+        <hr style="color: white; height: 1px;">
+        <!-- end -->
         <%}%>
 
             <div>
+                <!-- post feed starts here -->
                 <ul style="list-style: none; text-align: left; margin: 0; padding: 0;">
                     <%for(p of post){%>
-
-                        <li
-                            style="margin: 60px ;  background-color: rgb(255, 255, 255);box-shadow: 0px 0px 6px 4px rgb(224, 224, 224);min-height: 160px;">
-                            <div class="card">
-                                <h5 class="card-header  bg-primary text-white " style="font-weight: bolder;">
-                                    <%=p.user.name%> posted this..
-                                </h5>
-                                <div class="card-body" style="background-color: #dae9ff;">
-
-                                    <p class="card-text " style="font-weight: bold;">
-                                        <%= p.content%>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <%if(locals.user){%>
-                                <div class="comment-box my-2" style="width: 100%; padding: 12px;">
-
-                                    <form action="/comments/create" method="POST">
-                                        <input type="text" name="content" placeholder="write comment on this"
-                                            width="80%" class="form-control " required>
-                                        <input type="hidden" name="post" value="<%=p._id%>" required>
-                                        <input type="submit" style="border-radius: 25px;border:none;"
-                                            class="bg-primary text-white my-2 mx-1 p-1" placeholder="comment it">
-                                    </form>
-
-                                    <%if(p.comments.length !==0){%>
-                                        <hr>
-                                        <div style="font-size: 15px;" class="mx-1">Relevant Comments</div>
-                                        <hr>
-                                        <%}%>
-
-                                            <div style="display: flex; width: 100%;flex-direction: column;">
-                                                <%for(x of p.comments){%>
-
-                                                    <%if(x.user.email===locals.user.email){%>
-                                                        <p class="p-2 my-2 "
-                                                            style="align-self : flex-end; margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: lightgrey;">
-                                                            <%= x.content%>
-                                                                <span class="badge bg-primary text-end">
-                                                                    <%=x.user.name%> commented!
-                                                                </span>
-                                                                <span style = "margin-right: 20px;font-size: xx-small;">
-                                                                      <%=x.user.createdAt%>
-                                                                </span>
-                                                        </p>
-                                                        <%}else{%>
-                                                            <p class="p-2 my-2 "
-                                                                style="margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: rgb(235, 231, 231);">
-                                                                <%= x.content%>
-                                                                    <span class="badge bg-primary text-end">
-                                                                        <%=x.user.name%> commented!
-                                                                    </span>
-                                                                    <span style = "margin-right: 20px;font-size: xx-small;">
-                                                                        <%=x.user.createdAt%>
-                                                                  </span>
-                                                            </p>
-                                                            <%}%>
-
-                                                                <%}%>
-                                            </div>
-
-                                </div>
-                                <%}%>
-                        </li>
+                       <li>
+                        <%- include('_post') -%>
+                    </li> 
+                    <hr style="color: white; height: 1px;">   
                         <%}%>
                 </ul>
+                <!-- post feed ends here -->
             </div>
+             
+          
 </section>
+
+<section id="friends-list" style="position : fixed;margin-left: 1050px;">
+   
+        <!-- display of friends -->
+        <h4 style="font-weight: bolder;text-align: center;color: lightgrey;margin-left: 2rem;">VIEW FRIENDS</h4>
+
+        <ul style="list-style-type: none;">
+
+            <%for(f of p_user){%>
+            <li style="margin-bottom: 2rem;">
+                <a href="/users/profile/<%= f.id%>" style="color: white;text-decoration: none;"><%= f.name%></a>
+                <div style="color: grey;"><%= f.email%></div>
+            </li>
+            <%}%>
+        </ul>
+</section>
+
+</div>

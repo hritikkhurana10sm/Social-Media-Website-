@@ -1,9 +1,11 @@
 footer div div a button {
   margin: 0;
-  border: none!important;
-  background-color: #37475a!important;
-  width: 100%; 
-}
+  border: none;
+  background-color: #37475a;
+  width: 100%; }
+
+footer div div a button:hover {
+  background-color: #4b5055; }
 
 footer div div ul {
   display: flex;
@@ -18,5 +20,3 @@ footer div div li ul {
   list-style: none;
   width: 200px;
   margin-top: 2rem; }
-
- 

@@ -6,7 +6,9 @@ const passport = require('passport');
 
 const user_controller = require('../controllers/users_controller');
 
-router.get('/profile', passport.checkAuthentication ,user_controller.profile);
+router.get('/profile/:id', passport.checkAuthentication ,user_controller.profile);
+
+router.post('/update/:id', passport.checkAuthentication ,user_controller.update);
 
 router.get('/signin' , user_controller.signin );
 

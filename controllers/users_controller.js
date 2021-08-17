@@ -3,11 +3,35 @@ const Post = require('../models/posts');
 
 module.exports.profile = function profile(req , res){
 
-   
-    return res.render('user_profile' , {
+    User.findById(req.params.id , function(err , users){
 
-        title : "User Profile"
-    });
+        return res.render('user_profile' , {
+
+            title : "User Profile",
+            user_profile : users
+        });
+    })
+   
+   
+}
+
+module.exports.update = function(req , res){
+
+   if(req.params.id == req.user.id){ 
+     User.findByIdAndUpdate(req.params.id , req.body , function(err , user){
+
+           if(err){
+               console.log("error in updating the users info");
+               return;
+           }
+
+           return res.redirect('back');
+        })
+        
+    }else{
+
+            return res.redirect('back');
+        }
 }
 
 module.exports.signin = function(req , res){
@@ -80,7 +104,7 @@ module.exports.createSession = function(req , res){
 
   //todo
 
-  return res.redirect('/users/profile');
+  return res.redirect('/');
 }
 
 module.exports.destroySession= function(req , res){

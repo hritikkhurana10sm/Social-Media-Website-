@@ -9,5 +9,6 @@ const posts_controller = require('../controllers/posts_controller');
 
 console.log("post controller");
 router.post('/new' , passport.checkAuthentication , posts_controller.newUserPosts);
+router.get('/distroy/:id' , passport.checkAuthentication , posts_controller.distroy);
 
 module.exports = router;

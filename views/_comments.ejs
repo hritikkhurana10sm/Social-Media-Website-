@@ -1,0 +1,46 @@
+<%if(x.user.email===locals.user.email){%>
+    <div class="p-2 my-2 "
+        style="display :flex;justify-content : space-between; align-self : flex-end; margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: #dae9ff;">
+        <div>
+            <span class="badge bg-primary text-end">
+                <%=x.user.name%> commented!
+            </span>
+            <%= x.content%></div>
+        <div style = "text-align : end">
+            <!-- <span class="badge bg-primary text-end">
+                <%=x.user.name%> commented!
+            </span> -->
+           
+            <a href="/comments/destroy/<%= x.id %>" style = "background-color: #dae9ff; width: 0; height: 0;color: #dae9ff;"> 
+                ⛔️
+                </a>
+            </div>   
+        </div>
+   
+    <span style="margin-right: 20px;font-size: small;text-align: end;color: grey;">
+        <%=x.user.createdAt%>
+    </span>
+    <%}else{%>
+        <div class="p-2 my-2 "
+            style="display :flex;justify-content : space-between;margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: rgb(235, 231, 231);">
+           <div> 
+            <span class="badge bg-primary text-end">
+                <%=x.user.name%> commented!
+            </span>
+            <%= x.content%>
+           </div>    
+          
+           <!-- <div style = "text-align : end">
+                <a href="/comments/destroy/<%= x.id %>" style = "background-color: #dae9ff; width: 0; height: 0;color: #dae9ff;">
+                    ⛔️
+                    </a>
+                </div> -->
+
+              </div>  
+        
+        <span style="margin-right: 20px;font-size: small; color: grey;">
+            <%=x.user.createdAt%>
+        </span>
+        <%}%>
+
+ 
