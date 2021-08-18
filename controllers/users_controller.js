@@ -66,7 +66,7 @@ module.exports.signup = function(req , res){
 //get the sign up data
 module.exports.create = function(req , res){
 
-    console.log('+++++++++++++++++++++ ' , req.body);
+    // console.log('+++++++++++++++++++++ ' , req.body);
     if(req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }   
@@ -103,14 +103,14 @@ module.exports.create = function(req , res){
 module.exports.createSession = function(req , res){
 
   //todo
-
+   req.flash('success' , 'Logged in Successfully :)');
   return res.redirect('/');
 }
 
 module.exports.destroySession= function(req , res){
     //res.clearCookie('Social');
     req.logout();
-
+    req.flash('success' , 'You have logged out!!');
     res.redirect('/');
 }
 

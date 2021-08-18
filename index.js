@@ -24,6 +24,14 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+//node sass middle ware
+//sass is a file used to write css with ease
+const sassMiddleware = require('node-sass-middleware');
+
+//flash messages
+const flash = require('connect-flash');
+
+const customMware = require('./config/middleware');
 /*
 -- Why did we use express-sessions
 
@@ -48,6 +56,7 @@ app.use(express.urlencoded());
 
 //to use cookie parser
 app.use(cookieParser());
+
 
 //extract style and scripts from subpages into the layout
 app.set('layout extractStyles' , true);
@@ -90,10 +99,14 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-//node sass middle ware
-//sass is a file used to write css with ease
 
-const sassMiddleware = require('node-sass-middleware');
+//using flash 
+app.use(flash());
+
+//requiring and using the custom middleware
+app.use(customMware.setFlash);
+
+
 
 app.use(sassMiddleware({
 

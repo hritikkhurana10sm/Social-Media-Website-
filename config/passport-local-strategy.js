@@ -18,9 +18,10 @@ const User = require('../models/user');
 
 passport.use(new localStrategy({
 
-      usernameField: 'email'  ////email as of user input
+      usernameField: 'email'  ,////email as of user input
+      passReqToCallback : true
 },   //email , password are input from user
-   function(email , password , done){
+   function(req , email , password , done){
 
         //done tell weather request successful or fail
 
@@ -29,13 +30,15 @@ passport.use(new localStrategy({
         User.findOne({email:email} , function(err , user){
 
             if(err){
-                console.log('error in finding the user!');
+                // console.log('error in finding the user!');
+                 req.flash('error' , err);
                 return done(err);
             };
             //if user not found or passowrd not match
            if(!user || user.password != password){
-               console.log("Invalid username/password");
-               return done(null , false);
+            //    console.log("Invalid username/password");
+              req.flash('error', 'Invalid username/password');   
+            return done(null , false);
            };
          console.log('user - > -> ' , user);
            return done(null , user);
@@ -55,7 +58,7 @@ passport.deserializeUser(function(id ,done){
     User.findById(id ,function(err , user){
 
           if(err){
-              console.log('error in finding the user');
+               req.flash('error' , err);
               return done(err);
           }
 

@@ -1,5 +1,8 @@
 //here in this we are connecting the node and mongoBD using a layer called mangoose 
 
+//Mongoose queries are asynchronous as it contains a callback and also exceute other statements
+
+
 //include mongobd
 const mongoose = require('mongoose');
 

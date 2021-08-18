@@ -1,44 +1,44 @@
 const Comment = require('../models/comment');
 const Post = require('../models/posts')
 
-module.exports.create = function(req , res){
+module.exports.create = async function(req , res){
 
-  Post.findById(req.body.post , function(err , post){
+   try{
+
+    let post = await Post.findById(req.body.post);
 
     if(post){
 
-        Comment.create({
+        let comment = await Comment.create({
 
             content : req.body.content,
             post : req.body.post,
             user : req.user._id
-        } , function(err , comment){
+        });
 
-            if(err){
-
-                console.log("error in creating comment");
-                return;
-            }
             post.comments.push(comment);
             post.save();
-
+            req.flash('success' , 'Commented successfully!!');
             res.redirect('/');
-        })
-    }
-  })
+        }
+
+   }catch(err){
+      // console.log('Error' , err);
+       req.flash('error' , err); 
+      return;
+   }
+
+  
  } 
 
 
- module.exports.destroy = function(req , res){
+ module.exports.destroy = async function(req , res){
 
+    try{
      //find the comment by comment id
-    Comment.findById(req.params.id , function(err , comment){
+    let comment = await Comment.findById(req.params.id );
 
-         if(err){
-             console.log("error in deleting the comment");
-             return;
-         }
- 
+        
         if(comment.user == req.user.id || p.id == req.user.id){
 
         //storing the id of post on which user commented
@@ -48,16 +48,20 @@ module.exports.create = function(req , res){
 
          //remove the comment from the post
 
-         Post.findByIdAndUpdate(postId , { $pull : {comments : req.params.id}} , function(err , post){
-
+         let post = Post.findByIdAndUpdate(postId , { $pull : {comments : req.params.id}} , function(err , post){
+            
+            req.flash('success' , 'Comment deleted successfully!!');
             res.redirect('back');
          })
 
         }else{
-
+            req.flash('error' , 'Comment cant be deleted :(');
             res.redirect('back');
         }
 
 
-    })
+    }catch(err){
+        req.flash('error' , err);
+            return;
+    }
  }
