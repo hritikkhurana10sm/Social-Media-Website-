@@ -7,30 +7,30 @@ module.exports.home = async function home(req , res){
   
    //  console.log(req.cookies);
   
-   //     //populatig the user
-   //     Post.find({}).populate('user').populate({path:'comments', populate : {
-   //               path:'user'
-   //        }
-   //     })
-   //     .exec(function(err , post){
+       //populatig the user
+      //  Post.find({}).populate('user').populate({path:'comments', populate : {
+      //            path:'user'
+      //     }
+      //  })
+      //  .exec(function(err , post){
 
-   //          if(err){
-   //             console.log("error is finding the user");
-   //             return;
-   //          }
+      //       if(err){
+      //          console.log("error is finding the user");
+      //          return;
+      //       }
 
-   //       User.find({} , function(err , users){
+      //    User.find({} , function(err , users){
               
-   //          res.render('home' , {
-   //             'title' : "Twitter Clone",
-   //              post : post,
-   //              p_user : users
-   //        })
+      //       res.render('home' , {
+      //          'title' : "Twitter Clone",
+      //           post : post,
+      //           p_user : users
+      //     })
 
-          // console.log("bla");
-   //       })
+      //     console.log("bla");
+      //    })
             
-   //     })
+      //  })
 
 
     try{

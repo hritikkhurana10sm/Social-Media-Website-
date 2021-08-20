@@ -5,11 +5,30 @@ module.exports.newUserPosts = async function (req, res) {
 
     try {
 
-        await Post.create({
+       let post =  await Post.create({
             content: req.body.content,
             user: req.user._id
         });
-        req.flash('success' , 'Post created successfully!!');
+
+
+       
+           
+
+         if(req.xhr){
+            post = await post.populate('user', 'name').execPopulate();
+            console.log("post created using ajax" , post.user.name);
+            return res.status(200).json({
+            
+                data : {
+                    post : post
+                },
+                message : 'Post created!'
+             })
+         }else{
+             console.log("not createdd!!");
+         }
+         req.flash('success' , 'Post created successfully!!');
+       
         return res.redirect('back');
 
     } catch (err) {

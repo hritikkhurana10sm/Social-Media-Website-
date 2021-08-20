@@ -73,7 +73,7 @@
      <hr style="color: white; height: 1px;">
     <%if(locals.user){%>
         <!-- Input the post form -->
-        <form action="/posts/new" method="POST" style="text-align: start;margin-left: 3rem;display: flex;justify-content: space-around;">
+        <form id = "new-post-form" action="/posts/new" method="POST" style="text-align: start;margin-left: 3rem;display: flex;justify-content: space-around;">
             
             <input placeholder="🤔 What's happening" name="content" style="justify-self : start;flex-grow : 1;background-color: black;color: grey;line-height: 2;font-size: 24px;border: none;outline: none;">
             <input type="submit"  value="Tweet" class="bg-primary" style="margin-right : 5rem;margin-left : 1.5rem;font-size : 16px;color:white;font-weight : bolder;width: 90px;padding: 0.5rem;border-radius: 25px;border: none;outline: none;">
@@ -85,7 +85,7 @@
 
             <div>
                 <!-- post feed starts here -->
-                <ul style="list-style: none; text-align: left; margin: 0; padding: 0;">
+                <ul id = "post-list" style="list-style: none; text-align: left; margin: 0; padding: 0;">
                     <%for(p of post){%>
                        <li>
                         <%- include('_post') -%>
@@ -116,3 +116,5 @@
 </section>
 
 </div>
+
+<script src="/js/home_posts.js"></script>

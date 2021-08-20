@@ -99,7 +99,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-
+//should be stored after session cookie onlyy
 //using flash 
 app.use(flash());
 

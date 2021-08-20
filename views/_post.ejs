@@ -1,6 +1,6 @@
 <!-- min-height: 160px; -->
 <li
-    style="margin: 35px; margin-bottom: 0px;  background-color: black;">
+   id = "post-<%= p._id %>" style="margin: 35px; margin-bottom: 0px;  background-color: black;">
     <div class="card bg-dark my-0" >
         <h5 class="card-header bg-dark text-white d-flex" style="font-weight: bolder;">
             <div style="flex-grow: 1;">
@@ -34,9 +34,9 @@
                    
             </form>
             <hr style="width: 100%;color: white;margin-top: 2px;">
-            <!-- <hr style="color: white; height: 1px;"> -->
+          
             <%if(p.comments.length !==0){%>
-                <!-- <hr style="color: white; height: 1px;"> -->
+               
                 <div style="font-size: 15px;color: #b9b6b6;padding : -1rem" class="mx-1">Relevant Comments</div>
                 <hr style="color: white; height: 1px;">
                 <%}%>
