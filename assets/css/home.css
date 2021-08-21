@@ -33,12 +33,13 @@
         margin-right: 5px;
       }
   #box #feed-posts {
-    border-right:  1px solid gray;
+    /* border-right:  1px solid gray; */
     
     width: 60%;
     padding: 0px; }
   #box #friends-list {
     width: 20%;
+    /* border-left:  1px solid gray; */
     padding: 13px; }
 
     #tweet{

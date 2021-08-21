@@ -1,6 +1,6 @@
 <!-- min-height: 160px; -->
 <li
-   id = "post-<%= p._id %>" style="margin: 35px; margin-bottom: 0px;  background-color: black;">
+   id = "post-<%=p._id%>" style="margin: 35px; margin-bottom: 0px;  background-color: black;">
     <div class="card bg-dark my-0" >
         <h5 class="card-header bg-dark text-white d-flex" style="font-weight: bolder;">
             <div style="flex-grow: 1;">
@@ -8,7 +8,7 @@
             </div>
 
             <%if(locals.user && locals.user.id==p.user.id){%>
-                <a href="/posts/distroy/<%= p.id %>">
+                <a class = "delete-post-button" href="/posts/distroy/<%= p._id %>">
                     <div class="badge bg-danger">Delete</div>
                 </a>
                 <%}%>

@@ -60,6 +60,17 @@ module.exports.distroy = async function (req, res) {
 
             //delete the comments on post with post id given
             await Comment.deleteMany({ post: req.params.id });
+
+            if(req.xhr){
+
+                return res.status(200).json({
+
+                     data : {
+                         post_id : req.params.id
+                     },
+                     message : "Post delete successfully"
+                })
+            }
             req.flash('success' , 'Post deleted successfully!!');
             return res.redirect('back');
 

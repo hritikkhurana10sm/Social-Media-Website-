@@ -16,7 +16,9 @@
                     success: function (data) {
                        let newPost = newPostDom(data.data.post);
                        $('#post-list').prepend(newPost);
-                         console.log(data);
+
+                       deletePost($(' .delete-post-button', newPost));
+                         console.log("sgs" ,data);
                     }, error: function (error) {
 
                          console.log(error.responseText);
@@ -33,7 +35,10 @@
           return $(`
      
           <li
-             id = "post- ${p._id }" style="margin: 35px; margin-bottom: 0px;  background-color: black;">
+             id = "post-${p._id}" >
+
+            <div style="margin: 35px; margin-bottom: 0px;  background-color: black;">
+
               <div class="card bg-dark my-0" >
                   <h5 class="card-header bg-dark text-white d-flex" style="font-weight: bolder;">
                       <div style="flex-grow: 1;">
@@ -42,7 +47,7 @@
                       </div>
           
                     
-                          <a href="/posts/distroy/{${p.id}">
+                          <a class = "delete-post-button" href="/posts/distroy/${p._id}">
                               <div class="badge bg-danger">Delete</div>
                           </a>
                           
@@ -82,10 +87,45 @@
                               </div>
           
                   </div>
-                 
+                </div>  
+                  <hr style="color: white; height: 1px;">   
+
           </li>
-          <hr style="color: white; height: 1px;">   
+         
           `)
+     }
+
+
+     //method to delete the post from the post
+
+     let deletePost = function(deleteLink){
+           //  console.log("swahhhhhhh");
+           $(deleteLink).click(function(e){
+
+
+                  e.preventDefault();
+
+                  $.ajax({
+                    
+                    type : 'get',
+                    url : $(deleteLink).prop('href'),//gives link of href
+                    success : function(data){
+                           // console.log("*****************************************************daatatatata" , data);
+                        $(`#post-${data.data.post_id} `).remove();
+                        new Noty({
+                          theme : 'nest',
+                          text: 'Post deleted Successfully',
+                          type : 'success',
+                          layout : 'topRight',
+                          timeout : 1350
+                    
+                      }).show();
+                    },error : function(error){
+
+                         console.log(error.responseText);
+                    }
+                  })
+           })
      }
 
      createPost();
