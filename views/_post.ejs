@@ -1,6 +1,5 @@
-<!-- min-height: 160px; -->
-<li
-   id = "post-<%=p._id%>" style="margin: 35px; margin-bottom: 0px;  background-color: black;">
+
+   <!-- <hr style="color: white; height: 1px;"> -->
     <div class="card bg-dark my-0" >
         <h5 class="card-header bg-dark text-white d-flex" style="font-weight: bolder;">
             <div style="flex-grow: 1;">
@@ -23,8 +22,8 @@
 
     <%if(locals.user){%>
         <div class="comment-box my-2" style="width: 100%; padding: 0px;">
-
-            <form action="/comments/create" method="POST" style="display: flex;justify-content: space-around;margin-top: 20px;"> 
+            
+            <form id = "new-comment-form" action="/comments/create" method="POST" style="display: flex;justify-content: space-around;margin-top: 20px;"> 
                 <input type="text" name="content" placeholder="🚀 Tweet your reply" width="100%" class="form-control "
                   style="background-color: black;color: white;border: none;border: none;box-shadow: none;line-height: 0.8;font-size: 20px;"  required>
                 <input type="hidden" name="post" value="<%=p._id%>" required>
@@ -41,15 +40,20 @@
                 <hr style="color: white; height: 1px;">
                 <%}%>
 
-                    <div style="display: flex; width: 100%;flex-direction: column;">
+                    <ul id = "comment-list" style="display: flex; width: 100%;flex-direction: column;list-style: none;padding: 0;margin : 0;">
                         <%for(x of p.comments){%>
-
+                            
+                           
                             <%- include('_comments') -%>
                            
-                                <%}%>
-                               
-                    </div>
+                                
+                           
+
+                            <%}%>
+                        </ul>
 
         </div>
         <%}%>
-</li>
+        <!-- <hr style="color: white; height: 1px;"> -->
+
+

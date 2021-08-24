@@ -15,9 +15,27 @@ module.exports.create = async function(req , res){
             post : req.body.post,
             user : req.user._id
         });
+           
+       
+       
 
             post.comments.push(comment);
             post.save();
+
+            if(req.xhr){
+                  comment = await comment.populate('user', 'name').execPopulate();
+                  comment = await comment.populate('user', 'createdAt').execPopulate();
+                  comment  = await  comment.populate('post').execPopulate();
+                  //console.log("post created using ajax" , post.user.name);
+                  console.log("comment created by ajax  " , comment);
+                     return res.status(200).json({
+                     
+                         data : {
+                             comment : comment
+                         },
+                         message : 'Comment created!'
+                      })
+                  }
             req.flash('success' , 'Commented successfully!!');
             res.redirect('/');
         }
@@ -49,7 +67,18 @@ module.exports.create = async function(req , res){
          //remove the comment from the post
 
          let post = Post.findByIdAndUpdate(postId , { $pull : {comments : req.params.id}} , function(err , post){
-            
+            // 
+            if(req.xhr){
+
+                return res.status(200).json({
+
+                     data : {
+                         comment_id : req.params.id
+                     },
+                     message : "Post delete successfully"
+                })
+            }
+            // 
             req.flash('success' , 'Comment deleted successfully!!');
             res.redirect('back');
          })
