@@ -70,7 +70,7 @@
     
           <div class="comment-box my-2" style="width: 100%; padding: 0px;">
               
-              <form id = "new-comment-form" action="/comments/create" method="POST" style="display: flex;justify-content: space-around;margin-top: 20px;"> 
+              <form id="post-${ p._id }-comments-form" action="/comments/create" method="POST" style="display: flex;justify-content: space-around;margin-top: 20px;"> 
                   <input type="text" name="content" placeholder="🚀 Tweet your reply" width="100%" class="form-control "
                     style="background-color: black;color: white;border: none;border: none;box-shadow: none;line-height: 0.8;font-size: 20px;"  required>
                   <input type="hidden" name="post" value="${p._id}" required>
@@ -87,7 +87,7 @@
                   <hr style="color: white; height: 1px;">
                  
   
-                      <ul id = "comment-list" style="display: flex; width: 100%;flex-direction: column;list-style: none;padding: 0;margin : 0;">
+                      <ul id="post-comments-${ p._id }" style="display: flex; width: 100%;flex-direction: column;list-style: none;padding: 0;margin : 0;">
                           
                           </ul>
   
@@ -141,6 +141,7 @@
 
          // get the post's id by splitting the id attribute
          let postId = self.prop('id').split("-")[1]
+         
          new PostComments(postId);
       });
 
