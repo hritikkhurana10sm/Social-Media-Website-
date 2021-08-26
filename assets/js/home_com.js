@@ -5,6 +5,9 @@
 // 2. Creation of every post dynamically via AJAX
 
 console.log("dalee");
+
+//creating a class postComments
+/*basically it is used as to make all the comments of all the post to be created and deleted ajaxly*/
 class PostComments{
 
      constructor(postId){
@@ -22,7 +25,7 @@ class PostComments{
         });
     }
 
-
+//creating any comment ajaxly
     createComment(postId){
         console.log("dalee212121");
         let pSelf = this;
@@ -59,6 +62,7 @@ class PostComments{
         });
     }
 
+    //returning the dom
     newCommentDom(x){
 
         return $(`
@@ -90,17 +94,18 @@ class PostComments{
         `)
     }
 
-
+//deleting the comment ajaxly
     deleteComment(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-
+        console.log("hey deleted");
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
+                    console.log("hey deleted " , data.data.comment_id);
                     $(`#comment-${data.data.comment_id}`).remove();
-
+                    
                     new Noty({
                         theme: 'relax',
                         text: "Comment Deleted",

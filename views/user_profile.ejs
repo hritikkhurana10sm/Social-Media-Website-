@@ -1,15 +1,25 @@
  <link rel="stylesheet" href="/css/user_profile.css">
- 
-
+ <h1 style="color:whitesmoke">Profile</h1>
+ <hr style="background-color: whitesmoke; height: 6px;">
+<a href="/">
+ <span style="position :fixed; background-color: rgb(60, 216, 60);top : 25%; left : 0;font-weight: bolder;color: white;padding: 6px;border-radius: 0px 12px 12px 0px;">
+     Back to Home
+ </span></a>
+  <div style="display: flex;margin: 70px;color: whitesmoke;justify-content: space-around;">
+ <!-- use in index.js also <-- uploads folder -->
+<img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%= user.avatar%>" alt="<%= user.name %>">
 
 <%if(user_profile.id == locals.user.id){%>
      
-  <form action="/users/update/<%= user_profile.id %>" method="POST">
-    <h1>Profile</h1>
-    <hr>
-       <input type="text" name="name" value="<%= locals.user.name%>" placeholder="write name">
-       <input type="email" name="email" value="<%= locals.user.email%>" placeholder="write email">
-       <input type="submit" value="update">
+  <form  action="/users/update/<%= user_profile.id %>" enctype="multipart/form-data" method="POST" >
+     
+    <div class = "card" style="display: flex;flex-direction: column; justify-content: space-between;">
+      <h2 style="text-align : center;color: black;">Profile Info</h2> 
+      <input style = "margin: 12px;"type="text" name="name" value="<%= locals.user.name%>" placeholder="write name">
+       <input style = "margin: 12px;"type="email" name="email" value="<%= locals.user.email%>" placeholder="write email">
+       <input style = "margin: 12px;"type="file" name = "avatar" placeholder="Profile Picture">
+       <input style = "margin: 12px;"type="submit" value="update">
+    </div>
   </form>
 <%}else{%>
   <h1>Friends</h1>
@@ -18,6 +28,7 @@
   <h1><%=user_profile.email%></h1>
   <hr>  
 <%}%>
+</div>
  <!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">

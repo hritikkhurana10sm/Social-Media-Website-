@@ -121,7 +121,7 @@ app.use(sassMiddleware({
 //adding middleware
 //before starting the server it woulg go in router
 app.use('/' , require('./routes/index'));
-
+app.use('/uploads' , express.static(__dirname  + '/uploads'));
 //connecting to the port
 app.listen(port , function(err){
 

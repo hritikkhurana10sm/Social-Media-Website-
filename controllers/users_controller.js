@@ -15,23 +15,71 @@ module.exports.profile = function profile(req , res){
    
 }
 
-module.exports.update = function(req , res){
+module.exports.update = async function(req , res){
 
-   if(req.params.id == req.user.id){ 
-     User.findByIdAndUpdate(req.params.id , req.body , function(err , user){
+    try{
+    if(req.params.id == req.user.id){ 
 
-           if(err){
-               console.log("error in updating the users info");
-               return;
-           }
+        let user = await User.findByIdAndUpdate(req.params.id);
 
-           return res.redirect('back');
-        })
-        
+        //since we are using multer in form , we cant accesss req.body
+        //we use another method thats why
+
+        User.uploadAvatar(req , res , function(err){
+
+              if(err){
+                  console.log('---****Multer Error' , err);
+              }else{
+
+                 user.name = req.body.name;
+                 user.email = req.body.email;
+                     console.log("Gagdg");
+                 if(req.file){
+
+                    //  if(user.avatar){
+
+                    //     fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
+                    //  }
+
+                    //this is saving the path of uploaded file in the avatar field in the user schema
+
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+
+                    console.log('user.avatar : ' , user.avatar);
+                 }
+                 console.log(user);
+                 user.save();
+              }
+
+              return res.redirect('back');
+        });
+
     }else{
+        console.log("hat hat hat");
+        res.redirect('back');
+    }
+}catch(err){
+          
+         req.flash('error' , err);
+         return res.redirect('back');
+    }
 
-            return res.redirect('back');
-        }
+   
+//    if(req.params.id == req.user.id){ 
+//      User.findByIdAndUpdate(req.params.id , req.body , function(err , user){
+
+//            if(err){
+//                console.log("error in updating the users info");
+//                return;
+//            }
+
+//            return res.redirect('back');
+//         })
+        
+//     }else{
+
+//             return res.redirect('back');
+//         }
 }
 
 module.exports.signin = function(req , res){
