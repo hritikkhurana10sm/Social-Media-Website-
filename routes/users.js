@@ -25,7 +25,12 @@ router.post('/create-session' , passport.authenticate(
 
 router.get('/signout' , user_controller.destroySession);  
 
-router.get('/auth/google' , passport.authenticate('google' , {scope:['profile' , 'email']}));
+// these are the routes for the google-auth strategy
 
+//18 --> creating routes here
+//this will find the user in the google
+router.get('/auth/google' , passport.authenticate('google' , {scope:['profile' , 'email']}));
+//this is a callback that will create session
 router.get('/auth/google/callback' , passport.authenticate('google',{failureRedirect : '/users/signin'}), user_controller.createSession);
+
 module.exports = router;

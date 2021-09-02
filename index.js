@@ -24,7 +24,11 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+//18  -> including the passport-google-oauth2-strategy , including under passport
+// > it is used to sign in / sign up using google or any other social media platform to codial
 const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
+
 //possport-jwt strategy
 const passportJwt = require('./config/passport-jwt-strategy');
 
