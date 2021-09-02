@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/posts');
-
+const fs = require('fs');
+const path = require('path')
 module.exports.profile = function profile(req , res){
 
     User.findById(req.params.id , function(err , users){
@@ -35,17 +36,27 @@ module.exports.update = async function(req , res){
                  user.email = req.body.email;
                      console.log("Gagdg");
                  if(req.file){
+                        
+                  //  var log = new File(user.avatar);
+                  const paths = path.join(__dirname , '..' , user.avatar );
+                  console.log("***********",paths);
+                    if(fs.existsSync(paths)){
+                        console.log("*****************************************user.avatar : " , user.avatar);
+                        fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
+                    }
 
+                    console.log("*************************************hojaaaaa");
                     //  if(user.avatar){
 
                     //     fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
+                    //     user.avatar = null;
                     //  }
 
                     //this is saving the path of uploaded file in the avatar field in the user schema
 
                     user.avatar = User.avatarPath + '/' + req.file.filename;
 
-                    console.log('user.avatar : ' , user.avatar);
+                    // console.log('user.avatar : ' , user.avatar);
                  }
                  console.log(user);
                  user.save();

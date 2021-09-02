@@ -49,7 +49,7 @@ module.exports.home = async function home(req , res){
          let users = await User.find({});
 
          return res.render('home' , {
-            title : 'Twitter|Home',
+            title : 'Twitter | Home',
             post : posts ,
             p_user : users
          })

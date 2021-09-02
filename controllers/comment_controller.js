@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/posts')
 
+
 module.exports.create = async function(req , res){
 
    try{
@@ -16,16 +17,16 @@ module.exports.create = async function(req , res){
             user : req.user._id
         });
            
-       
+       console.log("comment******************** " , comment);
        
 
             post.comments.push(comment);
             post.save();
 
             if(req.xhr){
-                  comment = await comment.populate('user', 'name').execPopulate();
-                  comment = await comment.populate('user', 'createdAt').execPopulate();
-                  comment  = await  comment.populate('post').execPopulate();
+                  comment = await comment.populate('user').execPopulate();
+                // comment = await comment.populate('user', 'avatar').execPopulate();
+                 // comment  = await  comment.populate('post').execPopulate();
                   //console.log("post created using ajax" , post.user.name);
                   console.log("comment created by ajax  " , comment);
                      return res.status(200).json({

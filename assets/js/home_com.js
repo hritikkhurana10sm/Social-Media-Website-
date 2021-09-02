@@ -40,7 +40,7 @@ class PostComments{
                 success: function(data){
                     let newComment = pSelf.newCommentDom(data.data.comment);
 
-                    console.log("bhai log ", newComment);
+                    console.log("bhai log+++++++++ ", newComment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
@@ -71,6 +71,10 @@ class PostComments{
             <div class="p-2 my-2 "
                 style="display :flex;justify-content : space-between; align-self : flex-end; margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: #dae9ff;">
                 <div>
+              
+                <span>
+                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="${x.user.avatar}" onerror="this.onerror=null;this.src='/images/avatar.png';">
+            </span>
                     <span class="badge bg-primary text-end">
                         ${x.user.name} commented!
                     </span>
@@ -85,7 +89,7 @@ class PostComments{
                 </div>
            
             <span style="margin-right: 20px;font-size: small;text-align: end;color: grey;">
-                Commented Just Now . . . .
+                ${x.user.createdAt}
                 
             </span>
           

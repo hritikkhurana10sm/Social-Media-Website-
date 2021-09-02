@@ -21,5 +21,8 @@ console.log("Hey I am in router!!");
 
 // router.post('/new-user-post' , home_controller.newUserPosts);
 
+
+router.use('/api' , require('./api'));
+
 module.exports = router;
 //this is to provide its access outside the file also , we are actaully exporting its control outside the file

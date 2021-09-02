@@ -24,6 +24,10 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
+//possport-jwt strategy
+const passportJwt = require('./config/passport-jwt-strategy');
+
 //node sass middle ware
 //sass is a file used to write css with ease
 const sassMiddleware = require('node-sass-middleware');

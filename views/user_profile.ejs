@@ -7,10 +7,11 @@
  </span></a>
   <div style="display: flex;margin: 70px;color: whitesmoke;justify-content: space-around;">
  <!-- use in index.js also <-- uploads folder -->
-<img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%= user.avatar%>" alt="<%= user.name %>">
+
 
 <%if(user_profile.id == locals.user.id){%>
      
+  <img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%=user_profile.avatar%>" alt="<%= user_profile.name %>"> 
   <form  action="/users/update/<%= user_profile.id %>" enctype="multipart/form-data" method="POST" >
      
     <div class = "card" style="display: flex;flex-direction: column; justify-content: space-between;">
@@ -22,11 +23,14 @@
     </div>
   </form>
 <%}else{%>
-  <h1>Friends</h1>
+  <img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%=user_profile.avatar%>" alt="<%=user_profile.name %>">
+  <div class = "card" style="display: flex;flex-direction: column; justify-content: space-between;color: black;">
+    <h2 style="text-align : center;color: black;">Profile Info</h2> 
   <hr>
   <h1><%=user_profile.name%></h1>
   <h1><%=user_profile.email%></h1>
-  <hr>  
+  <hr> 
+  </div> 
 <%}%>
 </div>
  <!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
