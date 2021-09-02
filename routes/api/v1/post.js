@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/' , postsApi.index);
 
 //to delete the post
+//deleting a post requires jwt security so as to give authorisation to the proper user there
 router.delete('/:id',passport.authenticate('jwt' , {session : false}), postsApi.distroy);
 
 module.exports = router;

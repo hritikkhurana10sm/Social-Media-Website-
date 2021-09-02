@@ -8,6 +8,8 @@ const router = express.Router();
  - v1 index will use post index
  - post index will use postindex controller 
 */
+
+//using routes going through v1
 router.use('/v1' , require('./v1'));
 
 module.exports = router;

@@ -21,7 +21,7 @@ console.log("Hey I am in router!!");
 
 // router.post('/new-user-post' , home_controller.newUserPosts);
 
-
+// 17 -> using api route
 router.use('/api' , require('./api'));
 
 module.exports = router;

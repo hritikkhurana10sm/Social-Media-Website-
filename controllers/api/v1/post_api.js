@@ -1,3 +1,5 @@
+/* Post api to show and delete the posts */ 
+
 //including the Post and Comment Schema
 const Post =  require('../../../models/posts');
 const Comment = require('../../../models/comment')
