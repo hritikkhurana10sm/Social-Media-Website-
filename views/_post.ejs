@@ -7,6 +7,8 @@
             </div>
 
             <%if(locals.user && locals.user.id==p.user.id){%>
+
+                <!-- DELETE A POST / THROUGH POST ID WE CAN DO THAT -->
                 <a class = "delete-post-button" href="/posts/distroy/<%= p._id %>">
                     <div class="badge bg-danger">Delete</div>
                 </a>
@@ -24,10 +26,14 @@
         <div class="comment-box my-2" style="width: 100%; padding: 0px;">
             
             <!-- changed id of this ** -->
+
+            <!-- CREATE A COMMENT UNDER A PARTICULAR POST / POST-SMETHOD -->
             <form id="post-<%= p._id %>-comments-form" action="/comments/create" method="POST" style="display: flex;justify-content: space-around;margin-top: 20px;"> 
                 <input type="text" name="content" placeholder="🚀 Tweet your reply" width="100%" class="form-control "
                   style="background-color: black;color: white;border: none;border: none;box-shadow: none;line-height: 0.8;font-size: 20px;"  required>
-                <input type="hidden" name="post" value="<%=p._id%>" required>
+               
+                <!-- SENDING THE POST ID IN THE FORM CONTENT ITSELF -->
+                  <input type="hidden" name="post" value="<%=p._id%>" required>
                 <input type="submit" style="border-radius: 25px;border:none;padding: 0.2rem; width: 95px; "
                     class="bg-primary text-white "  value="Reply">
 
@@ -40,7 +46,8 @@
                 <div style="font-size: 15px;color: #b9b6b6;padding : -1rem" class="mx-1">Relevant Comments</div>
                 <hr style="color: white; height: 1px;">
                 <%}%>
-                    <!-- changed id after git ** -->
+                    
+                <!-- COMMENT BOX OF EACH POST -->
                     <ul id="post-comments-<%= p._id %>" style="display: flex; width: 100%;flex-direction: column;list-style: none;padding: 0;margin : 0;">
                         <%for(x of p.comments){%>
                             

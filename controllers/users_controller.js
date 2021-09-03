@@ -1,7 +1,11 @@
 const User = require('../models/user');
 const Post = require('../models/posts');
+
+// 16 -> fs and path are required for file uploading 
 const fs = require('fs');
 const path = require('path')
+
+//finding the profile by user id
 module.exports.profile = function profile(req , res){
 
     User.findById(req.params.id , function(err , users){
@@ -12,8 +16,6 @@ module.exports.profile = function profile(req , res){
             user_profile : users
         });
     })
-   
-   
 }
 
 //16 -> avatar used here using multer library
@@ -97,9 +99,10 @@ module.exports.update = async function(req , res){
 //         }
 }
 
+// sign in page redirect
 module.exports.signin = function(req , res){
 
-    
+    //if already logged in , then it will be authenticated and redirect back to profile only
     if(req.isAuthenticated()){
 
         return res.redirect('/users/profile');
@@ -113,6 +116,7 @@ module.exports.signin = function(req , res){
     
 }
 
+// sign up page
 module.exports.signup = function(req , res){
 
     if(req.isAuthenticated()){
@@ -129,7 +133,7 @@ module.exports.signup = function(req , res){
 //get the sign up data
 module.exports.create = function(req , res){
 
-    // console.log('+++++++++++++++++++++ ' , req.body);
+   //if password does not matches 
     if(req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }   
@@ -165,13 +169,13 @@ module.exports.create = function(req , res){
 //sign in and create a session
 module.exports.createSession = function(req , res){
 
-  //todo
-   req.flash('success' , 'Logged in Successfully :)');
+  req.flash('success' , 'Logged in Successfully :)');
   return res.redirect('/');
 }
 
 module.exports.destroySession= function(req , res){
     //res.clearCookie('Social');
+
     req.logout();
     req.flash('success' , 'You have logged out!!');
     res.redirect('/');
@@ -179,6 +183,5 @@ module.exports.destroySession= function(req , res){
 
 /*
 Without Mongo Store, this was the problem we faced
-
 - User was logged out after every server load
 */

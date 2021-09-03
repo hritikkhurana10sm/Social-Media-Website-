@@ -1,19 +1,17 @@
 const Post = require('../models/posts');
 const Comment = require('../models/comment');
 
+//CREATING A POST 
 module.exports.newUserPosts = async function (req, res) {
 
     try {
 
        let post =  await Post.create({
             content: req.body.content,
-            user: req.user._id
+            user: req.user._id // logged in  user can create post so thats why we are accessing directly here
         });
 
-
-       
-           
-
+        //FOR AJAX CALLS (CHECKING WEATHER THE REQUEST WAS XhrRequest)
          if(req.xhr){
             post = await post.populate('user', 'name').execPopulate();
             console.log("post created using ajax" , post.user.name);
@@ -40,9 +38,7 @@ module.exports.newUserPosts = async function (req, res) {
 }
 
 
-
-
-
+//DELETING THE POST 
 module.exports.distroy = async function (req, res) {
 
 
@@ -50,7 +46,7 @@ module.exports.distroy = async function (req, res) {
           
             let post = await Post.findById(req.params.id);
                    
-              //.id converting the object id into string
+          //.id converting the object id into string
         if (post.user == req.user.id) {
 
             post.remove(); // delete post from the data base using passport 
@@ -61,6 +57,7 @@ module.exports.distroy = async function (req, res) {
             //delete the comments on post with post id given
             await Comment.deleteMany({ post: req.params.id });
 
+            // DELETING THROUGH AJAX CALLS
             if(req.xhr){
 
                 return res.status(200).json({
@@ -71,6 +68,7 @@ module.exports.distroy = async function (req, res) {
                      message : "Post delete successfully"
                 })
             }
+
             req.flash('success' , 'Post deleted successfully!!');
             return res.redirect('back');
 
@@ -82,7 +80,18 @@ module.exports.distroy = async function (req, res) {
         return;
      }
       
-    /*Post.findById(req.params.id, function (err, post) {
+ 
+}
+
+
+
+
+
+
+
+
+
+   /*Post.findById(req.params.id, function (err, post) {
 
 
         if (err) {
@@ -107,4 +116,3 @@ module.exports.distroy = async function (req, res) {
             res.redirect('back');
         }
     })*/
-}

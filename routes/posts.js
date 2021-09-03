@@ -7,8 +7,10 @@ const passport = require('passport');
 //to require it
 const posts_controller = require('../controllers/posts_controller');
 
-console.log("post controller");
+//TO CREATE A POST / SENDING THE DATA 
 router.post('/new' , passport.checkAuthentication , posts_controller.newUserPosts);
+
+//TO DELETE THE POST / TO GET ACHKNOWLEDGMENT
 router.get('/distroy/:id' , passport.checkAuthentication , posts_controller.distroy);
 
 module.exports = router;

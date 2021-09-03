@@ -7,7 +7,10 @@ const passport = require('passport');
 //to require it
 const comments_controller = require('../controllers/comment_controller');
 
-console.log("comment controller");
+//CREATING A COMMENT
 router.post('/create' , passport.checkAuthentication , comments_controller.create);
+
+//DELETING A COMMENT
 router.get('/destroy/:id' , passport.checkAuthentication , comments_controller.destroy);
+
 module.exports = router;

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//post schema containing - > 1.content of post , 2.user id who created that post , 3. ids of comments that put on this post
+//so that we can show comments of a particular post easily
 const postSchema = new mongoose.Schema({
 
     content : {
@@ -16,13 +18,13 @@ const postSchema = new mongoose.Schema({
     comments:[
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : 'Comment'
+            ref : 'Comment' // refer to which schema
         }
     ]
 } , {
     timestamps : true
 });
 
+//part of the post schema
 const Posts = mongoose.model('Posts' , postSchema);
-
 module.exports = Posts;

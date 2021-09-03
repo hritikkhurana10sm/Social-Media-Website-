@@ -7,7 +7,7 @@ const path = require('path');
 // 16 -> requiring path of avatars
 const AVATAR_PATH = path.join('/uploads/users/avatars');
 
-//adding schema
+//adding user schema containing -> email, password and name
 const userSchema = new mongoose.Schema({
 
     email : {
@@ -62,6 +62,6 @@ let storage = multer.diskStorage({
 userSchema.statics.uploadAvatar = multer({storage : storage}).single('avatar');
 userSchema.statics.avatarPath = AVATAR_PATH;
 
+//part of user schema
 const User = mongoose.model('User' , userSchema);
-
 module.exports = User;
