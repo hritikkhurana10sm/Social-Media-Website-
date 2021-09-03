@@ -4,8 +4,10 @@ named username and password. If your site prefers to name these fields
 differently, options are available to change the defaults.
 */ 
 
+// npm install express-session
 // npm install passport
 // npm install passport-local
+
 
 const passport = require('passport');
 

@@ -1,83 +1,100 @@
-const { urlencoded } = require('express');
-const express = require('express'); // dependencies
+const { urlencoded } = require('express'); // done
+
+// npm install express
+const express = require('express'); // done
 
 /* express , cookie-parser //dependencies , mongoose , passport , passport-local , ejs , express-ejs-layout */                   
 
-//calling express
-const cookieParser = require('cookie-parser') // dependencies
-const app = express();
-const port = 8000;
-//while production or launching on server we use port 80 by default
+// calling express
+// npm install cookie-parser
+const cookieParser = require('cookie-parser') // done
 
-//requiring mongoose
-const db = require('./config/mongoose');
+const app = express(); // done
+const port = 8000;  // done
+// while production or launching on server we use port 80 by default
 
-//used for session cookie
-const session = require('express-session');
+// requiring mongoose
+// npm install mongoose
+const db = require('./config/mongoose'); // done
 
-//passport(authentication) , passportlocal(authentication strategy for the user) 
-//, passportGoogle (authentication and strategy for google sign in)  , passportJwt (api security strategy)
-const passport = require('passport');
-const passportLocal = require('./config/passport-local-strategy');
-
-//18  -> including the passport-google-oauth2-strategy , including under passport
-// > it is used to sign in / sign up using google or any other social media platform to codial
-const passportGoogle = require('./config/passport-google-oauth2-strategy');
-
-
-//possport-jwt strategy
-const passportJwt = require('./config/passport-jwt-strategy');
-
-//node sass middle ware
-//sass is a file used to write css with ease
-const sassMiddleware = require('node-sass-middleware');
-
-//flash messages
-const flash = require('connect-flash');
-
-const customMware = require('./config/middleware');
+// used for session cookie <-- this is required for using PASSPORT.JS so as to STORE COOKIE AND MAKE SESSION
+// npm install express-session
+const session = require('express-session'); // done
 /*
 -- Why did we use express-sessions
-
 == To create a session cookie 
 == To store the logged in user’s information in an encrypted format in the cookie 
 */
 
+/* passport(authentication) , passportlocal(authentication strategy for the user) 
+,  passportGoogle (authentication and strategy for google sign in)  , passportJwt (api security strategy)*/
+const passport = require('passport'); // done
+//including initialisation and session
 
-//including layouts
-const expressLayouts = require('express-ejs-layouts');
-app.use(expressLayouts);
+const passportLocal = require('./config/passport-local-strategy');//done
 
-//npm install connect-mongo
-//to store cookie permanently in database once the user signed in
-//as we dont want that all the users are signed out once we changed something in code at production level
-//or restart the server agaain
-const MongoStore =  require('connect-mongodb-session')(session);
+// 18  -> including the passport-google-oauth2-strategy , including under passport
+// > it is used to sign in / sign up using google or any other social media platform to codial
+const passportGoogle = require('./config/passport-google-oauth2-strategy'); // done
 
 
-//to convert the data from form into object
-app.use(express.urlencoded());
+// possport-jwt strategy
+const passportJwt = require('./config/passport-jwt-strategy'); //done
+
+// node sass middle ware
+// sass is a file used to write css with ease
+// npm install node-sass-middleware
+// we need to app.use also
+const sassMiddleware = require('node-sass-middleware'); // done
+
+// flash messages
+// npm install connect-flash
+// connect-flash needs express-session and cookie-parser
+// and there are steps here
+const flash = require('connect-flash'); // (1)
+
+const customMware = require('./config/middleware'); // (2)
+
+
+
+// including layouts
+// npm install express-ejs-layouts
+const expressLayouts = require('express-ejs-layouts'); //done
+app.use(expressLayouts);//done
+
+// npm install connect-mongo
+// to store cookie permanently in database once the user signed in
+// as we dont want that all the users are signed out once we changed something in code at production level
+// or restart the server agaain
+const MongoStore =  require('connect-mongodb-session')(session); //done
+
+
+//to convert the data from form into object / use req.body.something
+app.use(express.urlencoded()); // done
 
 //to use cookie parser
-app.use(cookieParser());
+//manually setting the cookie in browser
+app.use(cookieParser()); // done
 
 
 //extract style and scripts from subpages into the layout
-app.set('layout extractStyles' , true);
-app.set('layout extractScripts' , true);
+app.set('layout extractStyles' , true); //done
+app.set('layout extractScripts' , true); //done
 
-//including assets files
-app.use(express.static('./assets'));
+// including assets files
+app.use(express.static('./assets')); // done
 
 
-
-//setting up the view engine
+// npm install ejs
+// setting up the view engine
 app.set('view engine' , 'ejs');
 app.set('views' , './views');
 
-app.use(session({
+app.use(session({  // const MongoStore =  require('connect-mongodb-session')(session);
+
     name : "Social",
-    //TODO change the secret befre deployment in production mode
+
+    //TODO change the secret before deployment in production mode
     secret : "blahsomething",
     saveUninitialized : false,
     resave:false ,
@@ -95,23 +112,22 @@ app.use(session({
      })
 }));
 
+//initialisation and session
 app.use(passport.initialize());
 app.use(passport.session());
 
-//as soon as user is authenticated , it will pass the user
-//info to the views
+//as soon as user is authenticated , it will pass the user info to the views
 app.use(passport.setAuthenticatedUser);
 
 
-//should be stored after session cookie onlyy
-//using flash 
-app.use(flash());
+// should be stored after session cookie only ( using flash ) 
+app.use(flash()); // (3)
 
-//requiring and using the custom middleware
-app.use(customMware.setFlash);
-
+// requiring and using the custom middleware
+app.use(customMware.setFlash); // (4)
 
 
+// using SASS MIDDLEWARE // (5)
 app.use(sassMiddleware({
 
     src: './assets/scss',
@@ -119,13 +135,18 @@ app.use(sassMiddleware({
     debug : true,
     outputStyle : 'extended',
     prefix:'/css'
-}));
+}));  // done
+// (6) Usage in layouts
 
 
-//adding middleware
-//before starting the server it woulg go in router
-app.use('/' , require('./routes/index'));
-app.use('/uploads' , express.static(__dirname  + '/uploads'));
+// adding middleware
+// before starting the server it would go in router
+app.use('/' , require('./routes/index')); // done
+
+//upload files -> avatar
+app.use('/uploads' , express.static(__dirname  + '/uploads')); //done
+
+
 //connecting to the port
 app.listen(port , function(err){
 
