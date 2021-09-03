@@ -138,14 +138,14 @@
 
         $('#post-list>li').each(function(){
           let self = $(this);
-         //console.log("99999999999999999999999999999" , self);
+          //console.log("self ==> " , self);
           let deleteButton = $(' .delete-post-button', self);
           deletePost(deleteButton);
 
          // get the post's id by splitting the id attribute
          let postId = self.prop('id').split("-")[1]
          //console.log(self.prop('id').split("-"));
-        //console.log("postIdddddddddddddddddddddddddddddddd " , postId);
+         //console.log("postId ==> " , postId);
          new PostComments(postId);
       });
 
