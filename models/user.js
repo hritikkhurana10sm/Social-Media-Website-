@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
-//requiring mongoose
 
-//multer required to upload avatars
+// 16 -> multer required to upload avatars
 const multer = require('multer');
-
+// 16 -> requiring the path
 const path = require('path');
-
-//requireing path of avatars
+// 16 -> requiring path of avatars
 const AVATAR_PATH = path.join('/uploads/users/avatars');
 
 //adding schema
@@ -26,6 +24,7 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    // 16 - > requiring avatar in schema
     avatar : {
         type : String
     }
@@ -35,16 +34,26 @@ const userSchema = new mongoose.Schema({
     timestamps : true
 });
 
+// 16 -> to use avatar or to upload files we use multer
+/// npm install multer
+
+//There are two functions filename and destination .These are both functions that determine where file should be stored
+//Destination is used to determine within which folder the uploaded files needed to be stored
+
 //stored in local storage
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
+      
         //joining the path here
       cb(null, path.join(__dirname , '..' , AVATAR_PATH));
     },
     filename: function (req, file, cb) {
+
+        //avatar are stored using some dates
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
               //avatar name
       cb(null, file.fieldname + '-' + Date.now())
+    //the default value of fieldname size is 100 bytes  
     }
   })
 

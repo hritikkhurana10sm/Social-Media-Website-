@@ -16,6 +16,7 @@ module.exports.profile = function profile(req , res){
    
 }
 
+//16 -> avatar used here using multer library
 module.exports.update = async function(req , res){
 
     try{
@@ -23,29 +24,32 @@ module.exports.update = async function(req , res){
 
         let user = await User.findByIdAndUpdate(req.params.id);
 
-        //since we are using multer in form , we cant accesss req.body
-        //we use another method thats why
-
+        //since we are using multer in form , we cant accesss req.body , thats why we use another method
+        //uploadAvatar property is used to do so
         User.uploadAvatar(req , res , function(err){
 
               if(err){
-                  console.log('---****Multer Error' , err);
+                  console.log('***********************Multer Error' , err);
               }else{
 
                  user.name = req.body.name;
                  user.email = req.body.email;
-                     console.log("Gagdg");
+                  
+                //if user have uploaded the file , then go into this if
                  if(req.file){
                         
-                  //  var log = new File(user.avatar);
+                  // var log = new File(user.avatar);
+                  
+                  //upload folder path
                   const paths = path.join(__dirname , '..' , user.avatar );
                   console.log("***********",paths);
-                    if(fs.existsSync(paths)){
-                        console.log("*****************************************user.avatar : " , user.avatar);
+                   
+                  //we are checking weather file at this path exists , if yes delete it first
+                  if(fs.existsSync(paths)){
+                        console.log("*************user.avatar : " , user.avatar);
                         fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
                     }
 
-                    console.log("*************************************hojaaaaa");
                     //  if(user.avatar){
 
                     //     fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
@@ -53,12 +57,12 @@ module.exports.update = async function(req , res){
                     //  }
 
                     //this is saving the path of uploaded file in the avatar field in the user schema
-
                     user.avatar = User.avatarPath + '/' + req.file.filename;
 
                     // console.log('user.avatar : ' , user.avatar);
                  }
                  console.log(user);
+                 
                  user.save();
               }
 
