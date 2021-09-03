@@ -6,10 +6,10 @@ const passport = require('passport');
 const user_controller = require('../controllers/users_controller');
 
 
-//get user profile
+//get user profile  (**AUTHENTICATION)
 router.get('/profile/:id', passport.checkAuthentication ,user_controller.profile);
 
-//update user information
+//update user information  (**AUTHENTICATION)
 router.post('/update/:id', passport.checkAuthentication ,user_controller.update);
 
 //sign in page
@@ -24,7 +24,7 @@ router.get('/signup' , user_controller.signup );
 //User Sign Up / Create User
 router.post('/create' ,  user_controller.create);
 
-//user Create session / Sign In
+//user Create session / Sign In  (**AUTHENTICATION)
 router.post('/create-session' , passport.authenticate(
     'local' , //type of stratergy
     {failureRedirect : '/users/signin'}

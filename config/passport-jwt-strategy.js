@@ -1,4 +1,7 @@
 //security (authorisation and authentication) for the api
+
+// npm install passport-jwt
+
 const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;

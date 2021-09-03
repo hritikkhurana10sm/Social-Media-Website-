@@ -4,10 +4,12 @@ named username and password. If your site prefers to name these fields
 differently, options are available to change the defaults.
 */ 
 
+// npm install passport
+// npm install passport-local
 
 const passport = require('passport');
 
-//which strategy to use
+//which strategy to use to authenticate the user credentials
 const localStrategy = require('passport-local').Strategy;
 
 //require user
@@ -15,32 +17,34 @@ const User = require('../models/user');
 
 //authentication by passport local strategy
 //we need to tell passport to use local strategy
-
 passport.use(new localStrategy({
 
-      usernameField: 'email'  ,////email as of user input
+      usernameField: 'email'  ,////email as of user input (since by default it takes name as username)
       passReqToCallback : true
+
 },   //email , password are input from user
    function(req , email , password , done){
 
         //done tell weather request successful or fail
 
         //find a user and establish an indentity
-                   //first one email is that of schema
+        //first one email is that of schema
         User.findOne({email:email} , function(err , user){
 
             if(err){
                 // console.log('error in finding the user!');
-                 req.flash('error' , err);
+                req.flash('error' , err);
                 return done(err);
             };
-            //if user not found or passowrd not match
+
+           //if user not found or passowrd not match
            if(!user || user.password != password){
-            //    console.log("Invalid username/password");
-              req.flash('error', 'Invalid username/password');   
+            //console.log("Invalid username/password");
+            req.flash('error', 'Invalid username/password');   
             return done(null , false);
            };
-         console.log('user - > -> ' , user);
+           
+           console.log('user =====>>>> ' , user);
            return done(null , user);
         });
    }   
@@ -52,7 +56,8 @@ passport.serializeUser(function(user , done){
      done(null , user._id); // set id as cookie
 });
 
-//deserialization teh user from key in the cookie
+//deserialization the user from key in the cookie
+//getting the user to be used in req.user
 passport.deserializeUser(function(id ,done){
     
     User.findById(id ,function(err , user){
@@ -70,7 +75,6 @@ passport.deserializeUser(function(id ,done){
 passport.checkAuthentication = function(req , res , next){
 
      //if user is signed in , then pass the request to profile page
-
      if(req.isAuthenticated()){
          return next();
      }

@@ -1,15 +1,8 @@
 const { urlencoded } = require('express');
 const express = require('express'); // dependencies
 
-/*
-express
-cookie-parser //dependencies
-mongoose
-passport
-passport-local
-ejs
-express-ejs-layout
-*/                   
+/* express , cookie-parser //dependencies , mongoose , passport , passport-local , ejs , express-ejs-layout */                   
+
 //calling express
 const cookieParser = require('cookie-parser') // dependencies
 const app = express();
@@ -21,6 +14,9 @@ const db = require('./config/mongoose');
 
 //used for session cookie
 const session = require('express-session');
+
+//passport(authentication) , passportlocal(authentication strategy for the user) 
+//, passportGoogle (authentication and strategy for google sign in)  , passportJwt (api security strategy)
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
