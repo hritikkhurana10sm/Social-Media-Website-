@@ -4,7 +4,7 @@
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
 
-console.log("dalee");
+
 
 //creating a class postComments
 /*basically it is used as to make all the comments of all the post to be created and deleted ajaxly*/
@@ -15,7 +15,7 @@ class PostComments{
           this.postId = postId;
           this.postContainer = $(`#post-${postId}`);
           this.newCommentForm =  $(`#post-${postId}-comments-form`);
-          console.log("dalee21");
+          //console.log("dalee21");
           this.createComment(postId);
 
           let self = this;
@@ -27,7 +27,7 @@ class PostComments{
 
 //creating any comment ajaxly
     createComment(postId){
-        console.log("dalee212121");
+        
         let pSelf = this;
         this.newCommentForm.submit(function(e){
             e.preventDefault();

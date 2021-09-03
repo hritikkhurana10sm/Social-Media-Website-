@@ -62,7 +62,7 @@ const customMware = require('./config/middleware'); // (2)
 const expressLayouts = require('express-ejs-layouts'); //done
 app.use(expressLayouts);//done
 
-// npm install connect-mongo
+// npm install connect-mongo but now used as connect-mongodb-session***
 // to store cookie permanently in database once the user signed in
 // as we dont want that all the users are signed out once we changed something in code at production level
 // or restart the server agaain

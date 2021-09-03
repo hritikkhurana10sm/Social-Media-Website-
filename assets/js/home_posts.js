@@ -1,5 +1,6 @@
 {
-     //method to submit the form through ajax
+     // method to submit the form through ajax
+     // creating post 
      let createPost = function () {
 
           let newPostForm = $('#new-post-form');
@@ -17,6 +18,7 @@
                        let newPost = newPostDom(data.data.post);
                        $('#post-list').prepend(newPost);
                        
+                       //flash used here
                        new Noty({
                         theme : 'nest',
                         text: 'Post created Successfully',
@@ -26,9 +28,10 @@
                   
                     }).show();
                     
-                      // deletePost($(' .delete-post-button', newPost));
+                    // deletePost($(' .delete-post-button', newPost));
+
+                    //making delete button to work ajaxly
                       deletePost($(' .delete-post-button', newPost));  
-                      console.log("sgs" ,data);
                     }, error: function (error) {
 
                          console.log(error.responseText);
@@ -39,7 +42,6 @@
 
 
      //method to create a post in DOM
-
      let newPostDom = function(p) {
        
           return $(`
@@ -102,7 +104,7 @@
      //method to delete the post from the post
 
      let deletePost = function(deleteLink){
-           //  console.log("swahhhhhhh");
+         
            $(deleteLink).click(function(e){
 
 
@@ -113,7 +115,7 @@
                     type : 'get',
                     url : $(deleteLink).prop('href'),//gives link of href
                     success : function(data){
-                           // console.log("*****************************************************daatatatata" , data);
+                           
                         $(`#post-${data.data.post_id} `).remove();
                         new Noty({
                           theme : 'nest',
@@ -136,12 +138,14 @@
 
         $('#post-list>li').each(function(){
           let self = $(this);
+         // console.log("99999999999999999999999999999" , self);
           let deleteButton = $(' .delete-post-button', self);
           deletePost(deleteButton);
 
          // get the post's id by splitting the id attribute
          let postId = self.prop('id').split("-")[1]
-         
+         //console.log(self.prop('id'));
+        // console.log("postIdddddddddddddddddddddddddddddddd " , postId);
          new PostComments(postId);
       });
 
