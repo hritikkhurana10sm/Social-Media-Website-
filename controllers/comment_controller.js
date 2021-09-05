@@ -1,6 +1,9 @@
 const Comment = require('../models/comment');
 const Post = require('../models/posts')
 
+//including the mailer
+const commentsMailer = require('../mailers/comments_mailer');
+
 //CREATING A COMMENT
 module.exports.create = async function(req , res){
 
@@ -28,9 +31,12 @@ module.exports.create = async function(req , res){
             //THEN WE NEED TO CHANGE POST SCHEMA SO WE NEED TO SAVE CHANGES DONE IN ANOTHER SCHEMA
             post.save();
 
+            comment = await comment.populate('user').execPopulate();
+            commentsMailer.newComment(comment);
+            
             //TO DO THROUGH AJAX CALLS
             if(req.xhr){
-                  comment = await comment.populate('user').execPopulate();
+                
                   // comment = await comment.populate('user', 'avatar').execPopulate();
                   // comment  = await  comment.populate('post').execPopulate();
                   //console.log("post created using ajax" , post.user.name);
