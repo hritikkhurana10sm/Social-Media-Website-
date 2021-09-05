@@ -32,6 +32,7 @@ module.exports.create = async function(req , res){
             post.save();
 
             comment = await comment.populate('user').execPopulate();
+            //USING COMMENT MAILER
             commentsMailer.newComment(comment);
             
             //TO DO THROUGH AJAX CALLS
