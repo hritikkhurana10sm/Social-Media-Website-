@@ -63,7 +63,7 @@ module.exports.update = async function(req , res){
 
                     // console.log('user.avatar : ' , user.avatar);
                  }
-                 console.log(user);
+                // console.log(user);
                  
                  user.save();
               }

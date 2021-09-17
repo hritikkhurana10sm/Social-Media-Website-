@@ -1,7 +1,7 @@
 const Comment = require('../models/comment');
-const Post = require('../models/posts')
-
-//including the mailer
+const Post = require('../models/posts');
+const queue = require('../config/kue');
+const commentEmailWorker = require('../workers/comment_email_worker');
 const commentsMailer = require('../mailers/comments_mailer');
 
 //CREATING A COMMENT
@@ -23,7 +23,7 @@ module.exports.create = async function(req , res){
             user : req.user._id // LOCAL USER CAN CREATE THE COMMENT
         });
            
-       console.log("comment==========>>>>>>" , comment);
+    //    console.log("comment==========>>>>>>" , comment);
        
            //WE PUSH THE comment in the commments array OF THE POST SCHEMA
             post.comments.push(comment);
@@ -33,15 +33,29 @@ module.exports.create = async function(req , res){
 
             comment = await comment.populate('user').execPopulate();
             //USING COMMENT MAILER
-            commentsMailer.newComment(comment);
-            
+         commentsMailer.newComment(comment);
+            // var job = queue.create('emails' , comment).save(function(err){
+
+            //     if(err){
+            //         console.log("Error in sending to the queue" , err);
+            //         return;
+            //     }
+
+            //     console.log('****************************job enqueued ', job.id);
+            // })
+           
+            // job.on( 'error', function( err ) {
+            //     console.log( 'Oopsfdfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd... ', err );
+            // });
+            // console.log("99999999999999999999");
+
             //TO DO THROUGH AJAX CALLS
             if(req.xhr){
                 
                   // comment = await comment.populate('user', 'avatar').execPopulate();
                   // comment  = await  comment.populate('post').execPopulate();
                   //console.log("post created using ajax" , post.user.name);
-                  console.log("comment created by ajax  " , comment);
+                //   console.log("comment created by ajax  " , comment);
                      return res.status(200).json({
                      
                          data : {

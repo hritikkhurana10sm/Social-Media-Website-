@@ -8,7 +8,7 @@ const nodeMailer = require('../config/nodemailer');
 //this is a another way of exporting a mehtod
 exports.newComment = (comment) =>{
 
-    console.log('inside newComment mailer' , comment);
+    // console.log('inside newComment mailer' , comment);
 
    let htmlString = nodeMailer.renderTemplate({comment : comment} , '/comments/new_comment.ejs');
     nodeMailer.transporter.sendMail({
@@ -24,7 +24,7 @@ exports.newComment = (comment) =>{
              return;
          }
 
-         console.log("Message sent" , info);
+        //  console.log("**********************************************************Message sent" , info);
          return;
     })
 }

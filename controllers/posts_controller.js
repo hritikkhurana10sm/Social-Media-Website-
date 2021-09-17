@@ -14,7 +14,7 @@ module.exports.newUserPosts = async function (req, res) {
         //FOR AJAX CALLS (CHECKING WEATHER THE REQUEST WAS XhrRequest)
          if(req.xhr){
             post = await post.populate('user', 'name').execPopulate();
-            console.log("post created using ajax" , post.user.name);
+            // console.log("post created using ajax" , post.user.name);
             return res.status(200).json({
             
                 data : {
