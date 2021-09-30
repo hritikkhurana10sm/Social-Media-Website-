@@ -3,6 +3,9 @@
 My First MEAN Stack Web Application 😍
 
 # AMAZONE CLONE
+##created by Hritik Khurana
+##This is an amazon clone
+##tech stack used is HTML , CSS , javascript , Nodejs , ExpressJs, MongoDB
 
 ![cap3](https://user-images.githubusercontent.com/56023805/128506351-13311a14-033d-44a9-8024-a91039465c46.PNG)
 ![cap4](https://user-images.githubusercontent.com/56023805/128506359-8042afa4-ad52-4b5c-9a26-42e8f235b838.PNG)
