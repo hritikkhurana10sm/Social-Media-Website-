@@ -15,6 +15,8 @@ router.use('/posts' , require('./posts'));
 
 router.use('/comments' , require('./comments'));
 
+router.use('/likes', require('./likes'));
+
 //just confirmation statement
 console.log("!! @In router!!");
 
