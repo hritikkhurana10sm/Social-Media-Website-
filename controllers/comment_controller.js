@@ -3,6 +3,7 @@ const Post = require('../models/posts');
 const queue = require('../config/kue');
 const commentEmailWorker = require('../workers/comment_email_worker');
 const commentsMailer = require('../mailers/comments_mailer');
+const Like = require('../models/like');
 
 //CREATING A COMMENT
 module.exports.create = async function(req , res){
@@ -30,8 +31,8 @@ module.exports.create = async function(req , res){
 
             //THEN WE NEED TO CHANGE POST SCHEMA SO WE NEED TO SAVE CHANGES DONE IN ANOTHER SCHEMA
             post.save();
-
-            comment = await comment.populate('user').execPopulate();
+            
+            comment = await comment.populate('user', 'name email').execPopulate();
             //USING COMMENT MAILER
          commentsMailer.newComment(comment);
             // var job = queue.create('emails' , comment).save(function(err){
@@ -97,6 +98,9 @@ module.exports.create = async function(req , res){
          //WE USE findByIdAndUpdate OPTION
          let post = Post.findByIdAndUpdate(postId , { $pull : {comments : req.params.id}} , function(err , post){
             
+         // CHANGE :: destroy the associated likes for this comment
+          Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
+
             //RETURNING AJAXLY 
             if(req.xhr){
 

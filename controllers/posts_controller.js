@@ -1,5 +1,6 @@
 const Post = require('../models/posts');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 //CREATING A POST 
 module.exports.newUserPosts = async function (req, res) {
@@ -12,8 +13,9 @@ module.exports.newUserPosts = async function (req, res) {
         });
 
         //FOR AJAX CALLS (CHECKING WEATHER THE REQUEST WAS XhrRequest)
+        post = await post.populate('user' , 'name email').execPopulate();
          if(req.xhr){
-            post = await post.populate('user', 'name').execPopulate();
+           
             // console.log("post created using ajax" , post.user.name);
             return res.status(200).json({
             
@@ -48,6 +50,10 @@ module.exports.distroy = async function (req, res) {
                    
           //.id converting the object id into string
         if (post.user == req.user.id) {
+
+            // CHANGE :: delete the associated likes for the post and all its comments' likes too
+            await Like.deleteMany({likeable: post, onModel: 'Post'});
+            await Like.deleteMany({_id: {$in: post.comments}}); 
 
             post.remove(); // delete post from the data base using passport 
             //function

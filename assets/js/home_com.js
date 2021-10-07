@@ -44,6 +44,9 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
+                     // CHANGE :: enable the functionality of the toggle like button on the new comment
+                     new ToggleLike($(' .toggle-like-button', newComment));
+
                     new Noty({
                         theme: 'relax',
                         text: "Comment published!",
@@ -64,7 +67,7 @@ class PostComments{
 
     //returning the dom
     newCommentDom(x){
-
+console.log("x" ,  x);
         return $(`
         <li  id = "comment-${x._id}" style="display: flex;flex-direction: column;list-style:none;"> 
        
@@ -85,11 +88,20 @@ class PostComments{
                     <a  class="delete-comment-button" href="/comments/destroy/${ x._id }" style = "background-color: #dae9ff; width: 0; height: 0;color: #dae9ff;"> 
                         ⛔️
                         </a>
-                    </div>   
+                    </div> 
+                    
+                    <small>
+                            
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${x._id}&type=Comment">
+                        0 Likes
+                    </a>
+                
+                </small>
+
                 </div>
            
             <span style="margin-right: 20px;font-size: small;text-align: end;color: grey;">
-                ${x.user.createdAt}
+                ${x.createdAt}
                 
             </span>
           

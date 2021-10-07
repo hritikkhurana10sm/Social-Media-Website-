@@ -8,15 +8,18 @@ module.exports.home = async function home(req , res){
    try{
 
       //populate the user of each post
+      // CHANGE :: populate the likes of each post and comment
       let posts = await Post.find({})
       .sort('-createdAt')
       .populate('user')
-      .populate({
-          path : 'comments',
-          populate:{
-              path : 'user'
-          }
-      });
+      .populate('likes')
+       .populate({
+           path : 'comments',
+           populate:{
+               path : 'user'
+           }
+       })
+ 
      
       //require all the users
       let users = await User.find({});

@@ -17,6 +17,10 @@
                     success: function (data) {
                        let newPost = newPostDom(data.data.post);
                        $('#post-list').prepend(newPost);
+
+                    // CHANGE :: enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+
                        
                        //flash used here
                        new Noty({
@@ -55,7 +59,14 @@
                   ${p.user.name} 🤵 posted this..
               </div>
   
-             
+                      <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${p._id}&type=Post">
+                                    0 Likes
+                                </a>
+                            
+                        </small>
+
                   <a class = "delete-post-button" href="/posts/distroy/${ p._id}">
                       <div class="badge bg-danger">Delete</div>
                   </a>

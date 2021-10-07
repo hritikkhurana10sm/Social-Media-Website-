@@ -108,7 +108,7 @@ id = "post-<%=p._id%>" class="" style="margin: 35px; margin-bottom: 0px;  backgr
 
         </section>
 <!-- <div style="border-right: 1px solid grey;height: 100%;position: fixed; margin-left: 992px;"></div> -->
-<section id="friends-list" style="position : fixed;margin-left: 960px;">
+<section id="friends-list" style="position : fixed;margin-left: 1020px;">
    
         <!-- display of friends -->
         <h4 style="font-weight: bolder;text-align: center;color: lightgrey;margin-left: 2rem;">VIEW FRIENDS</h4>
@@ -127,3 +127,12 @@ id = "post-<%=p._id%>" class="" style="margin: 35px; margin-bottom: 0px;  backgr
 </div>
 <script src="/js/home_com.js" ></script>
 <script src="/js/home_posts.js"></script>
+
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script src="js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

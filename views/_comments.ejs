@@ -1,16 +1,20 @@
 <!-- EACH COMMENT UNDER A PARTICULAR POST -->
 <li  id = "comment-<%=x._id%>"style="display: flex;flex-direction: column;list-style:none;"> 
-<%if(x.user.email===locals.user.email){%>
+
+  
+<!-- TODO ::: TWO PEOPLE CAN HAVE SAME NAME AS WELL -->
+<%if(locals.user.name === x.user.name){%>
+   
    
     <div class="p-2 my-2 "
         style="display :flex;justify-content : space-between; align-self : flex-end; margin-bottom : 20px;border-radius : 15px;font-size: 15px; height: auto; width: 80%; background-color: #dae9ff;">
        
         <div>
             <span>
-                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="<%=x.user.avatar%>" onerror="this.onerror=null;this.src='/images/avatar.png';">
+                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="<%=locals.user.avatar%>" onerror="this.onerror=null;this.src='/images/avatar.png';">
             </span>
             <span class="badge bg-primary text-end">
-                <%=x.user.name%> commented!
+                <%=locals.user.name%> commented!
             </span>
             <%= x.content%></div>
         <div style = "text-align : end">
@@ -19,7 +23,19 @@
             <a class="delete-comment-button" href="/comments/destroy/<%= x._id %>" style = "background-color: #dae9ff; width: 0; height: 0;color: #dae9ff;"> 
                 ⛔️
                 </a>
-            </div>   
+            </div>  
+            
+             <!-- CHANGE :: display the likes of this comment, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+            <!-- study about the data attribute -->
+            <small>
+                <% if (locals.user){ %>
+                    <a class="toggle-like-button" data-likes="<%= x.likes.length %>" href="/likes/toggle/?id=<%=x._id%>&type=Comment">
+                            <%= x.likes.length %> Likes
+                    </a>
+                <% }else{ %>
+                    <%= x.likes.length %> Likes
+                <% } %>
+            </small>
         </div>
    
     <span style="margin-right: 20px;font-size: small;text-align: end;color: grey;">
@@ -37,7 +53,19 @@
                 <%=x.user.name%> commented!
             </span>
             <%= x.content%>
-           </div>    
+           </div>
+           
+            <!-- CHANGE :: display the likes of this comment, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+            <!-- study about the data attribute -->
+            <small>
+                <% if (locals.user){ %>
+                    <a class="toggle-like-button" data-likes="<%= x.likes.length %>" href="/likes/toggle/?id=<%=x._id%>&type=Comment">
+                            <%= x.likes.length %> Likes
+                    </a>
+                <% }else{ %>
+                    <%= x.likes.length %> Likes
+                <% } %>
+            </small>
          
               </div>  
         
