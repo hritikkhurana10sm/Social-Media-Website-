@@ -67,7 +67,7 @@ class PostComments{
 
     //returning the dom
     newCommentDom(x){
-console.log("x" ,  x);
+//console.log("x" ,  x);
         return $(`
         <li  id = "comment-${x._id}" style="display: flex;flex-direction: column;list-style:none;"> 
        

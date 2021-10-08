@@ -46,7 +46,7 @@ passport.use(new localStrategy({
             return done(null , false);
            };
            
-           console.log('user =====>>>> ' , user);
+           //console.log('user =====>>>> ' , user);
            return done(null , user);
         });
    }   
@@ -95,7 +95,7 @@ passport.setAuthenticatedUser = function(req , res , next){
 
        res.locals.user = req.user; 
 
-       console.log('rq.user  ' , req.user);
+      // console.log('rq.user  ' , req.user);
     }
 
     return next();

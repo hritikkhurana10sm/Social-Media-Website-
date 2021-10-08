@@ -126,6 +126,17 @@ app.use(flash()); // (3)
 // requiring and using the custom middleware
 app.use(customMware.setFlash); // (4)
 
+const cors = require('cors');
+app.use(cors());
+
+
+
+// setup the chat server to be used with socket.io
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server is listening on port 5000');
+
 
 // using SASS MIDDLEWARE // (5)
 app.use(sassMiddleware({

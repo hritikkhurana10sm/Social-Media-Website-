@@ -44,11 +44,11 @@ module.exports.update = async function(req , res){
                   
                   //upload folder path
                   const paths = path.join(__dirname , '..' , user.avatar );
-                  console.log("***********",paths);
+                //  console.log("***********",paths);
                    
                   //we are checking weather file at this path exists , if yes delete it first
                   if(fs.existsSync(paths)){
-                        console.log("*************user.avatar : " , user.avatar);
+                      //  console.log("*************user.avatar : " , user.avatar);
                         fs.unlinkSync(path.join(__dirname , '..' , user.avatar ));
                     }
 

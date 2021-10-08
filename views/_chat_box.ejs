@@ -1,0 +1,55 @@
+<!-- CHANGE :: Creat the code for chat box -->
+<% if (locals.user){ %>
+	<div id="user-chat-box" style = " 
+	position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: 1px dashed grey;
+    height: 350px;
+	width: 300px;
+	background: white;
+	padding: 5px;
+	box-shadow: 1px 1px 1px 1px lightgrey;">
+		<ul id="chat-messages-list" style = "
+		list-style: none;
+	    padding: 10px;
+	    height: 70%;
+	    background-color: white;
+	    overflow: auto;
+		">
+			<li class="other-message" style = "
+			  text-align: left;
+		    padding: 5px;
+			">
+				<span style="display: inline-block;
+	    		padding: 15px;
+		    	background-color: #ffa0a0;">Other Message</span>
+			</li>
+			<li class="self-message" style="  text-align: right;
+		    padding: 5px;
+		   ">
+				<span style="display: inline-block;
+	    		padding: 15px;
+    			background-color: #a0dcff;">
+					Self Message
+				</span>
+				
+			</li>
+
+		</ul>
+		<div id="chat-message-input-container" style=" height: 24%;
+		width: 100%;
+		display: flex;
+		flex-direction: row;"> 
+			<input id="chat-message-input" style = "height: 50%;
+			width: 70%;" placeholder="Type message here">
+			<button id="send-message" style=" height: 50%;
+			width: 30%;
+			font-size: 25px;
+			color: white;
+			border: none;
+			background: #58d258;">Send</button>
+		</div>
+
+	</div>
+<% } %>
