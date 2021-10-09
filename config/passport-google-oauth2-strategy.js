@@ -8,15 +8,15 @@ const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const crypto = require('crypto');
 
 const User = require('../models/user');
-
+const env = require('./environment');
 passport.use(new googleStrategy({
 
     //before doing this step , we need to go to google cloud
     //there we need to take google permission first to access the google sign in feature
     //we will register our project first and then all steps are one after one
-    clientID : "939968034010-32b3r9evf3jhcginbu6d59ull87d8peb.apps.googleusercontent.com",
-    clientSecret : "gkHZHuip86y7gVd_ERVR5w2w",
-    callbackURL : "http://localhost:8000/users/auth/google/callback"
+    clientID : env.google_client_id,
+    clientSecret : env.google_client_secret,
+    callbackURL : env.google_call_back_url 
 },
 
 

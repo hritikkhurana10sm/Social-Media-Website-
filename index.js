@@ -1,7 +1,9 @@
 const { urlencoded } = require('express'); // done
-
+const env = require('./config/environment');//:::::::::::::::::::::::::::::::::::::::
 // npm install express
 const express = require('express'); // done
+
+const logger = require('morgan');
 
 /* express , cookie-parser //dependencies , mongoose , passport , passport-local , ejs , express-ejs-layout */                   
 
@@ -82,6 +84,8 @@ app.set('layout extractStyles' , true); //done
 app.set('layout extractScripts' , true); //done
 
 // including assets files
+//::::::::::::::::::::::::::::::::::::::::
+//app.use(express.static(env.asset_path));
 app.use(express.static('./assets')); // done
 
 
@@ -95,7 +99,7 @@ app.use(session({  // const MongoStore =  require('connect-mongodb-session')(ses
     name : "Social",
 
     //TODO change the secret before deployment in production mode
-    secret : "blahsomething",
+    secret : env.session_cookie_key,
     saveUninitialized : false,
     resave:false ,
     cookie:{
@@ -138,9 +142,12 @@ chatServer.listen(5000);
 console.log('chat server is listening on port 5000');
 
 
+if(env.name == 'development'){
 // using SASS MIDDLEWARE // (5)
 app.use(sassMiddleware({
-
+    //:::::::::::::::::::::::::::::::::::::::::::::::::
+   // src: path.join(__dirname, env.asset_path, 'scss'),
+   // dest: path.join(__dirname, env.asset_path, 'css'),
     src: './assets/scss',
     dest:'./assets/css',
     debug : true,
@@ -148,6 +155,8 @@ app.use(sassMiddleware({
     prefix:'/css'
 }));  // done
 // (6) Usage in layouts
+}
+
 
 
 // adding middleware
@@ -157,6 +166,7 @@ app.use('/' , require('./routes/index')); // done
 //upload files -> avatar
 app.use('/uploads' , express.static(__dirname  + '/uploads')); //done
 
+app.use(logger(env.morgan.mode , env.morgan.options));
 
 //connecting to the port
 app.listen(port , function(err){

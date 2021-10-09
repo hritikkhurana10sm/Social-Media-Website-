@@ -1,7 +1,7 @@
 //user api to create session and it will return the jwt token
 
 const User = require('../../../models/user');
-
+const env = require('../../../config/environment');
 //on session creation , return the jsonwebtoken and yes include it!
 //to delete any post we included jwt security
 //first we need to get jwt token by creating session
@@ -25,7 +25,7 @@ module.exports.createSession = async function(req , res){
         return res.json(200 , {
             message : 'Sign in successfully , here is you token , keep it safe , shhhh',
             data : {
-                token : jwt.sign(user.toJSON() , 'socialClone' , {expiresIn : '100000'})
+                token : jwt.sign(user.toJSON() , env.jwt_secret , {expiresIn : '100000'})
             }
         });
         

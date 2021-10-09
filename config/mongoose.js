@@ -5,9 +5,9 @@
 
 //include mongobd
 const mongoose = require('mongoose');
-
+const env = require('./environment');
 //mongoose connect to data base : mongobd
-mongoose.connect('mongodb://localhost/social_db');
+mongoose.connect(`mongodb://localhost/${env.db}`);
 
 //to check weather connected or not
 const db = mongoose.connection
