@@ -77,7 +77,9 @@ class PostComments{
               
                 <span>
                 <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="${x.user.avatar}" onerror="this.onerror=null;this.src='/images/avatar.png';">
+                
             </span>
+           
                     <span class="badge bg-primary text-end">
                         ${x.user.name} commented!
                     </span>

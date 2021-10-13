@@ -1,5 +1,8 @@
-<link rel="stylesheet" href="/css/home.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
+
 <div id="box">
 
 
@@ -125,11 +128,15 @@ id = "post-<%=p._id%>" class="" style="margin: 35px; margin-bottom: 0px;  backgr
 </section>
 <%- include('_chat_box') -%>
 </div>
-<script src="/js/home_com.js" ></script>
-<script src="/js/home_posts.js"></script>
+
+
+<script src="<%= assetPath('js/home_com.js') %>"></script>
+<script src="<%= assetPath('js/home_posts.js') %>"></script>
 
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script src="js/toggle_likes.js"></script>
+
+<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
+
 <script>
     $('.toggle-like-button').each(function(){
         let self = this;
@@ -138,7 +145,8 @@ id = "post-<%=p._id%>" class="" style="margin: 35px; margin-bottom: 0px;  backgr
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
+
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <% if (locals.user){ %>
 <script>
     new ChatEngine('user-chat-box', '<%= locals.user.email %>')

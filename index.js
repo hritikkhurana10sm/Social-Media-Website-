@@ -5,6 +5,7 @@ const express = require('express'); // done
 
 const logger = require('morgan');
 
+
 /* express , cookie-parser //dependencies , mongoose , passport , passport-local , ejs , express-ejs-layout */                   
 
 // calling express
@@ -12,6 +13,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser') // done
 
 const app = express(); // done
+require('./config/view-helpers')(app);
 const port = 8000;  // done
 // while production or launching on server we use port 80 by default
 
@@ -85,8 +87,8 @@ app.set('layout extractScripts' , true); //done
 
 // including assets files
 //::::::::::::::::::::::::::::::::::::::::
-//app.use(express.static(env.asset_path));
-app.use(express.static('./assets')); // done
+app.use(express.static(env.asset_path));
+// app.use(express.static('./assets')); // done
 
 
 // npm install ejs
@@ -140,16 +142,16 @@ const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('chat server is listening on port 5000');
-
+const path = require('path');
 
 if(env.name == 'development'){
 // using SASS MIDDLEWARE // (5)
 app.use(sassMiddleware({
     //:::::::::::::::::::::::::::::::::::::::::::::::::
-   // src: path.join(__dirname, env.asset_path, 'scss'),
-   // dest: path.join(__dirname, env.asset_path, 'css'),
-    src: './assets/scss',
-    dest:'./assets/css',
+   src: path.join(__dirname, env.asset_path, 'scss'),
+   dest: path.join(__dirname, env.asset_path, 'css'),
+    // src: './assets/scss',
+    // dest:'./assets/css',
     debug : true,
     outputStyle : 'extended',
     prefix:'/css'

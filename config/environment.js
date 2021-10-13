@@ -18,7 +18,7 @@ const accessLogStream = rfs.createStream('access.log', {
 
 const development = {
     name: 'development',
-    asset_path: '/assets', // to be done latter as there is influence of sass here 
+    asset_path: './assets', // to be done latter as there is influence of sass here 
     session_cookie_key: 'blahsomething',
     db: 'social_db',
     smtp: {
@@ -47,7 +47,7 @@ const development = {
 // console.log('<<<<<<<<<<<<<<<<<<<',process.env.PORT,'>>>>>>>>>>>>>>>>>>>');
 const production =  {
     name: 'production',
-    asset_path: '/assets', // to be done latter as there is influence of sass here 
+    asset_path: './public/assets', // to be done latter as there is influence of sass here 
     session_cookie_key: process.env.CODEIAL_SESSION_COOKIE_KEY,//'EeVifR29aORhjA6B1QLzrVNdGT7Y81b5', //process.env.CODEIAL_SESSION_COOKIE_KEY
     db: process.env.CODEIAL_DB,//'production_db', //process.env.CODEIAL_DB
     smtp: {

@@ -11,7 +11,7 @@
        
         <div>
             <span>
-                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="<%=locals.user.avatar%>" onerror="this.onerror=null;this.src='/images/avatar.png';">
+                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="<%=locals.user.avatar%>" onerror="this.onerror=null;this.src='<%= assetPath('images/avatar.png')%>';">
             </span>
             <span class="badge bg-primary text-end">
                 <%=locals.user.name%> commented!
