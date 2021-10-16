@@ -89,7 +89,7 @@ app.set('layout extractScripts' , true); //done
 //::::::::::::::::::::::::::::::::::::::::
 app.use(express.static(env.asset_path));
 // app.use(express.static('./assets')); // done
-
+app.use(express.static('./impact'));
 
 // npm install ejs
 // setting up the view engine

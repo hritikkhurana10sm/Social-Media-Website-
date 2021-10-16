@@ -8,6 +8,7 @@ const path = require('path')
 //finding the profile by user id
 module.exports.profile = function profile(req , res){
 
+ console.log("user_profile ----------------- " , req.user);
     User.findById(req.params.id , function(err , users){
 
         return res.render('user_profile' , {
@@ -43,9 +44,9 @@ module.exports.update = async function(req , res){
                   // var log = new File(user.avatar);
                   
                   //upload folder path
-                  const paths = path.join(__dirname , '..' , user.avatar );
+                  const paths = path.join(__dirname , ".." , user.avatar );
                 //  console.log("***********",paths);
-                   
+               // console.log("[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]" , user.avatar);
                   //we are checking weather file at this path exists , if yes delete it first
                   if(fs.existsSync(paths)){
                       //  console.log("*************user.avatar : " , user.avatar);
@@ -99,6 +100,72 @@ module.exports.update = async function(req , res){
 //         }
 }
 
+/*
+module.exports.update = async function(req,res){
+
+    // if(req.user.id == req.params.id){
+
+    //     User.findByIdAndUpdate(req.user.id ,{name:  req.body.users_name, email:req.body.users_email} , function(err , user){
+    //         if(err){
+    //             console.log("user not found ! " , err);
+    //             return;
+    //         }
+
+    //         return res.redirect('back');
+    //     })
+
+    // }else{
+    //     return res.status(401).send("UNAUTHORIZED!");
+    // }
+
+    if(req.user.id == req.params.id){
+
+        try {
+
+            user = await User.findById(req.user.id);
+            //now our form is of type multipart so our body parser cant automaticlaly pasre the body contents
+            //for this we user multer
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log("*****Multer Error***** :" , err);
+                }
+   
+                    
+
+                console.log(req.file);
+                user.name = req.body.users_name;
+                user.email = req.body.users_email;
+
+                if(req.file){//only update file if user is sending it   
+                    
+                    //check if a user avatar exists and also check if the avatar 
+                    //exist check if there is a file at thef ile location
+                    //delete the pre existing avatar
+                    if(user.avatar  && fs.existsSync(path.join(__dirname , ".." , user.avatar))){
+                        fs.unlinkSync(path.join(__dirname , ".." , user.avatar)); //will deete the prexistingg file
+                    }
+                      
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                
+                }
+                user.save();
+                return res.redirect('back');
+            })
+
+
+
+        } catch (error) {
+            req.flash('error' , error);
+            return res.redirect('back');
+        }
+
+    }else{
+        req.flash('error' , 'UNAUTHORIZED !');
+        return res.status(401).send("UNAUTHORIZED!");
+    }
+
+}*/
+
 // sign in page redirect
 module.exports.signin = function(req , res){
 
@@ -107,7 +174,7 @@ module.exports.signin = function(req , res){
 
         return res.redirect('/users/profile');
      }
-
+   
     return res.render('user_sign_in' , {
 
         title : "Sign In"

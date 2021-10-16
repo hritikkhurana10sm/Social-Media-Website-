@@ -42,7 +42,10 @@ passport.use(new localStrategy({
            //if user not found or passowrd not match
            if(!user || user.password != password){
             //console.log("Invalid username/password");
-            req.flash('error', 'Invalid username/password');   
+            req.flash('Error', 'Invalid username/password');
+            
+         
+            
             return done(null , false);
            };
            
@@ -95,7 +98,7 @@ passport.setAuthenticatedUser = function(req , res , next){
 
        res.locals.user = req.user; 
 
-      // console.log('rq.user  ' , req.user);
+    //  console.log('rq.user  ' , req.user);
     }
 
     return next();

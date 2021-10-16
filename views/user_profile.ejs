@@ -1,5 +1,5 @@
  <!-- <link rel="stylesheet" href="/css/user_profile.css"> -->
- <link rel="stylesheet" href="<%= assetPath('css/user_profile.css') %>">
+ <link rel="stylesheet" href="<%= assetPath('/css/user_profile.css') %>">
 
  
  <h1 style="color:whitesmoke">Profile</h1>
@@ -15,7 +15,7 @@
 <%if(user_profile.id == locals.user.id){%>
 
   <!-- 16 -> src="<%=user_profile.avatar%>" -->
-  <img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%=user_profile.avatar%>" alt="<%= user_profile.name %>"> 
+  
   <!-- 16 -> multer for avatar use enctype -->
   <!-- npm install multer -->
   <form  action="/users/update/<%= user_profile.id %>" enctype="multipart/form-data" method="POST" >
@@ -24,12 +24,12 @@
       <h2 style="text-align : center;color: black;">Profile Info</h2> 
       <input style = "margin: 12px;"type="text" name="name" value="<%= locals.user.name%>" placeholder="write name">
        <input style = "margin: 12px;"type="email" name="email" value="<%= locals.user.email%>" placeholder="write email">
-       <input style = "margin: 12px;"type="file" name = "avatar" placeholder="Profile Picture">
+       <!-- <input style = "margin: 12px;"type="file" name = "avatar" placeholder="Profile Picture"> -->
        <input style = "margin: 12px;"type="submit" value="update">
     </div>
   </form>
 <%}else{%>
-  <img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%=user_profile.avatar%>" alt="<%=user_profile.name %>">
+  <!-- <img style = "box-shadow: 0px 0px 4px 4px rgb(255 130 159);border: 10px solid blanchedalmond; border-radius: 25px;width: 16rem;height: 17rem;"src="<%=user_profile.avatar%>" alt="<%=user_profile.name %>"> -->
   <div class = "card" style="display: flex;flex-direction: column; justify-content: space-between;color: black;">
     <h2 style="text-align : center;color: black;">Profile Info</h2> 
   <hr>

@@ -67,7 +67,7 @@ class PostComments{
 
     //returning the dom
     newCommentDom(x){
-//console.log("x" ,  x);
+
         return $(`
         <li  id = "comment-${x._id}" style="display: flex;flex-direction: column;list-style:none;"> 
        
@@ -76,7 +76,7 @@ class PostComments{
                 <div>
               
                 <span>
-                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="${x.user.avatar}" onerror="this.onerror=null;this.src='/images/avatar.png';">
+                <img style = "width: 2.1rem; height: 2.1rem;margin: -0.4em;margin-right: 0.2em;border-radius: 50%;"src="/cs/d1.jpg" onerror="this.onerror=null;this.src='/cs/d1.jpg';">
                 
             </span>
            
