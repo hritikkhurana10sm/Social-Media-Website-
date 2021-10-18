@@ -32,7 +32,7 @@ This is a twitter clone application . This application includes features such as
   <li>MongoDB</li>
 </ul>
 
-#How to install ?
+# How to install ?
 <ul>
   <li>Clone the repository <code>git clone -b branch https://github.com/hritikkhurana10sm/Twitter-Application.git</code></li>
   <li>Install the Node libraries <code>npm install</code></li>
