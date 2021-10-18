@@ -74,7 +74,7 @@ const MongoStore =  require('connect-mongodb-session')(session); //done
 
 
 //to convert the data from form into object / use req.body.something
-app.use(express.urlencoded()); // done
+app.use(express.urlencoded({extended : false})); // done
 
 //to use cookie parser
 //manually setting the cookie in browser
